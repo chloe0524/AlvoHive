@@ -1,0 +1,23 @@
+services:
+  apache:
+    image: apache
+    container_name: apache-AlvoHive
+    build:
+      context: .
+      dockerfile: docker/images/apache/dockerfile-apache
+    hostname: apache
+    restart: always
+    environment:
+      - TZ=Europe/Paris
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - "/home/chloe/holberton/AlvoHive/web:/var/www/html"
+    networks:
+      - kali
+      - postgres
+
+networks:
+  kali:
+  postgres:

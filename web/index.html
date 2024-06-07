@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Input Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Enter a Date</h1>
+        <form id="dateForm">
+            <label for="dateInput">Date (dd/mm/yyyy):</label>
+            <input type="text" id="dateInput" name="dateInput" pattern="\d{2}/\d{2}/\d{4}" required>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="window.location.reload();">Reload</button>
+            <button type="button" onclick="displayPopup();">Say Coucou!</button>
+        </form>
+    </div>
+
+    <script>
+        function displayPopup() {
+            alert('Coucou!');
+        }
+    </script>
+</body>
+</html>
+
