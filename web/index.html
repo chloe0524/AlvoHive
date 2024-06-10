@@ -2,27 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date Input Form</title>
+    <title>AlvoHive</title>
+    <!-- link CSS -->
     <link rel="stylesheet" href="styles.css">
+    <!-- icons -->
+    <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Enter a Date</h1>
-        <form id="dateForm">
-            <label for="dateInput">Date (dd/mm/yyyy):</label>
-            <input type="text" id="dateInput" name="dateInput" pattern="\d{2}/\d{2}/\d{4}" required>
-            <button type="submit">Submit</button>
-            <button type="button" onclick="window.location.reload();">Reload</button>
-            <button type="button" onclick="displayPopup();">Say Coucou!</button>
-        </form>
-    </div>
-
-    <script>
-        function displayPopup() {
-            alert('Coucou!');
-        }
-    </script>
+    <!-- Navbar -->
+    <header>
+       <div class="options">
+        <a href="#" class="logo">AlvoHive Logo<span>.</span></a>
+        <ul class="navbar">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <!-- Icons -->
+        <input type="checkbox" name="" id="menu">
+        <label for="menu"><i id="menu-icon" class='bx bx-menu' style='color:#20586d'></i></label>
+       </div> 
+    </header>
+    <section class="home container" id="home">
+        <div class="home-image">
+            <img src="images/home.png" alt="">
+        </div>
+        <div class="home-text">
+            <h1>Alvohive</h1>
+            <p>NARRATOR: (Black screen with text; The sound of buzzing bees can be heard) According to all known laws of aviation, <br> there is no way a bee should be able to fly. </p>
+            <a href="#" class="btn">Sign Up</a>
+        </div>
+    </section>
 </body>
 </html>
 
