@@ -103,41 +103,55 @@ header {
     cursor: pointer;
 }
 
-.home {
-    background-image: url('images/back_image_ground.jpg');
-    background-size: 100% 100%;
-    background-position: center;
+/* Blurred Background */
+.blurred-background {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background: url('images/back_image_ground.jpg') no-repeat center center/cover;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* Home Section */
+.home {
+    position: relative;
+    width: 100%;
     min-height: 640px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
+    z-index: 1; /* Ensure content is above the blurred background */
 }
 
-.home-content {
+/* Additional Styles for Home Section */
+.home .home-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.home-img {
-    flex: 1 1 17rem;
-}
-.home-text {
+.home .home-image {
     flex: 1 1 17rem;
 }
 
-.home-text h1{
+.home .home-text {
+    flex: 1 1 17rem;
+}
+
+.home .home-text h1 {
     font-size: 2.4rem;
 }
 
-.home-text p{
+.home .home-text p {
     font-size: 0.938rem;
     font-weight: 300;
     margin: 0.5rem 0 1rem;
 }
+
 
 .circled-square {
     padding: 20px; /* Adjust padding as needed */
