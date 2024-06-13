@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Sign Up - AlvoHive</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="blurred-background"></div>
+
+    <div class="content">
+        <header>
+            <div class="options">
+                <a href="index.html" class="logo">AlvoHive Logo<span>.</span></a>
+                <ul class="navbar">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <input type="checkbox" name="" id="menu">
+                <label for="menu"><i id="menu-icon" class='bx bx-menu' style='color:#20586d'></i></label>
+            </div>
+        </header>
+
+        <section class="login container">
+            <div class="login-frame">
+                <div class="login-tabs">
+                    <button class="tab-btn active" onclick="openTab(event, 'login')">Welcome back!</button>
+                    <button class="tab-btn" onclick="openTab(event, 'signup')">Pleased to meet you :)</button>
+                </div>
+                <div class="login-content">
+                    <div id="login" class="tab-content active">
+                        <form class="login-form">
+                            <h2>Log in</h2>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                            <button type="submit" class="btn">Login</button>
+                        </form>
+                    </div>
+                    <div id="signup" class="tab-content">
+                        <form class="signup-form">
+                            <h2>Sign Up</h2>
+                            <div class="form-group">
+                                <label for="firstname">First Name</label>
+                                <input type="text" id="firstname" name="firstname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" id="lastname" name="lastname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="username" style="font-style: italic;">Pick A Username</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <button type="submit" class="btn">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            var tabBtns = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>    
+</body>
+</html>

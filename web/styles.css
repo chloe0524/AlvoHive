@@ -1,5 +1,5 @@
-/* google font style + link */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
     font-family: "Roboto", sans-serif;
     margin: 0;
@@ -94,6 +94,20 @@ header {
     color: var(--bg-color);
 }
 
+.nav {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    display: none;
+}
+
+#menu:checked ~ .nav {
+    display: block;
+}
+
 #menu {
     display: none;
 }
@@ -103,7 +117,6 @@ header {
     cursor: pointer;
 }
 
-/* Blurred Background */
 .blurred-background {
     position: absolute;
     top: 0;
@@ -115,7 +128,6 @@ header {
     z-index: -1;
 }
 
-/* Home Section */
 .home {
     position: relative;
     width: 100%;
@@ -124,10 +136,9 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    z-index: 1; /* Ensure content is above the blurred background */
+    z-index: 1;
 }
 
-/* Additional Styles for Home Section */
 .home .home-content {
     display: flex;
     justify-content: space-between;
@@ -152,21 +163,17 @@ header {
     margin: 0.5rem 0 1rem;
 }
 
-
 .circled-square {
-    padding: 20px; /* Adjust padding as needed */
+    padding: 20px;
     border: 2px solid rgb(7, 14, 215);
-    border-radius: 15px; /* This gives a rounded square effect */
+    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto; /* Adjust margin as needed */
+    margin: 20px auto;
     background: var(--bg-color);
-    width: 70.5%; /* Set the width to a percentage or a specific value */
+    width: 70.5%;
     box-sizing: border-box;
 }
 
-
-
-/* Socials */
 .social-bar {
     position: fixed;
     top: 50%;
@@ -192,19 +199,120 @@ header {
     background-color: black;
 }
 
-.social-icon {
-    color: #000;
-    text-decoration: none;
+.social-bar a {
     margin: 10px 0;
-    font-size: 24px;
-    transition: color 0.3s ease;
-    position: relative;
+    text-align: center;
+    display: block;
+    transition: transform 0.3s;
 }
 
-.social-icon:hover {
-    color: #0073b1;
+.social-bar a:hover {
+    transform: translateY(-5px);
 }
-/* Existing styles... */
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.login-frame {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    padding: 60px 40px 40px 40px; /* Adjusted padding to increase height */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 600px; /* Adjusted width */
+    margin-top: 20px; /* Lowered the frame */
+    z-index: 1;
+}
+
+
+
+.login-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    background-color: var(--bg-color);
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.tab-btn.active {
+    background-color: var(--main-color);
+    color: var(--bg-color);
+}
+
+.login-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tab-content {
+    display: none;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.login-form,
+.signup-form {
+    width: 100%;
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 5px;
+    color: var(--bg-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.text-behind-frame {
+    position: relative;
+    z-index: -1;
+}
 
 body {
     margin: 0;
@@ -212,17 +320,15 @@ body {
     background: transparent;
 }
 
-/* Content Wrapper */
 .content {
     position: relative;
     z-index: 1;
 }
 
-/* Social Bar Styles */
 .social-bar {
     position: fixed;
     top: 50%;
-    right: 10px; /* Adjust this value to move the bar more to the right */
+    right: 10px;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
@@ -233,14 +339,14 @@ body {
 .social-bar::before {
     content: '';
     width: 2px;
-    height: 100px; /* Adjust this height as needed */
+    height: 100px;
     background-color: rgb(7, 14, 215);
 }
 
 .social-bar::after {
     content: '';
     width: 2px;
-    height: 100px; /* Adjust this height as needed */
+    height: 100px;
     background-color: rgb(7, 14, 215);
 }
 
@@ -257,38 +363,77 @@ body {
     color: rgb(7, 14, 215);
 }
 
-.btn{
+.btn {
     padding: 8px 22px;
     background: var(--main-color);
     color: var(--bg-color);
     font-weight: 300;
     box-shadow: 4px 4px 20px rgb(15 54 55 / 20%);
 }
-.btn:hover{
+
+.btn:hover {
     background: rgb(166, 186, 246);
     color: var(--text-color);
     font-weight: 400;
 }
 
-.heading{
+.heading {
     text-align: center;
 }
-.heading h2{
+
+.heading h2 {
     font-size: 1.7rem;
 }
-.heading p{
+
+.heading p {
     font-size: 0.938rem;
     font-weight: 300;
 }
 
-.services-container{
+.services-container {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
 }
-.services-container .box{
+
+.services-container .box {
     flex: 1 1 21rem;
 }
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgb(15 54 55 / 10%);
+    transition: all 0.2s linear;
+    background: var(--bg-color);
+}
+
+.box i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--main-color);
+}
+
+.box:hover {
+    transform: scale(1.03);
+    box-shadow: 4px 4px 20px rgb(15 54 55 / 20%);
+}
+
+.box h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.box p {
+    font-size: 0.938rem;
+    font-weight: 300;
+    margin: 0.5rem 0 1rem;
+}
+
 .box {
     display: flex;
     flex-direction: column;
@@ -337,4 +482,14 @@ body {
     border: 1px solid var(--main-color);
     font-weight: 300;
     transition: 0.2s all linear;
+}
+
+@media (max-width: 768px) {
+    .home {
+        flex-direction: column-reverse;
+    }
+
+    .login-frame {
+        width: 100%;
+    }
 }
