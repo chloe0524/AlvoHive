@@ -1,9 +1,13 @@
+# **:construction: WORK IN PROGRESS :construction:**
+
 # AlvoHive
 
-06/06/2024\
-file: mark.py -> cve fetch api to markdown file (no severity showing up)
-<br>
-07/06/2024
-files/directories: docker-compose -> docker compose file with infra for docker, handling apache.
-<pre> web -> first draft front
-<br>
+The goal is to create a tool to extract data gathered during a penetration test and organize it into a document template. It includes  charts, an executive summary, and a summary of the Common Vulnerabilities and Exposures (CVEs) identified.
+
+### :round_pushpin: Features (TL;DR style)
+- Data Extraction: Extracts data from penetration test results.
+- Organized Documentation: Organizes data into a document template with charts and summaries.
+- Executive Summary: Provides a concise summary of test outcomes and key findings.
+- CVE Summary: Includes a summary of identified Common Vulnerabilities and Exposures (CVEs).
+- Multi-Format Reports: Generates reports in various formats (HTML/CSS, Markdown, PDF).
+- REST API Integration: Automatically fetches summaries for CVE IDs.
