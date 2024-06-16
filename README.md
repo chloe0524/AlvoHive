@@ -38,5 +38,6 @@ The goal is to create a tool to extract data gathered during a penetration test 
 
 - PostgreSQL *Docker*: Database for the front-end and back-end.
 
-
+### Architecture
+![AlvoHive_archi](https://github.com/chloe0524/AlvoHive/assets/127857895/818aa976-346e-4036-958e-4c86eed8cf39)
 
