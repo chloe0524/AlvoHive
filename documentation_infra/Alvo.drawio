@@ -1,0 +1,95 @@
+<mxfile host="app.diagrams.net" modified="2024-06-09T11:08:27.506Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0" etag="zowPpWb0bj6qnqRuFmw8" version="24.4.13" type="device">
+  <diagram name="Page-1" id="e3a06f82-3646-2815-327d-82caf3d4e204">
+    <mxGraphModel dx="814" dy="441" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" style=";html=1;" />
+        <mxCell id="1" style=";html=1;" parent="0" />
+        <mxCell id="NxJ2Amh68cbNFl4zd6if-7" value="AlvoHive Compose" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad9d5;strokeColor=#ae4132;opacity=50;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="850" y="120" width="170" height="470" as="geometry" />
+        </mxCell>
+        <mxCell id="NxJ2Amh68cbNFl4zd6if-5" value="CVE-Seach Compose" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;opacity=50;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="120" width="270" height="470" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-9" value="2 Linux VirtualBox VMS" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;opacity=30;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;fontSize=21;fontStyle=1;fontColor=#27478a;" parent="1" vertex="1">
+          <mxGeometry x="164" y="100" width="500" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-8" value="Docker on WSL" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;opacity=30;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;fontSize=21;fontColor=#26a269;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="837" y="100" width="500" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="6a7d8f32e03d9370-15" target="jbzTZwGT330Ku82LHtjQ-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="6a7d8f32e03d9370-15" target="jbzTZwGT330Ku82LHtjQ-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NxJ2Amh68cbNFl4zd6if-1" value="TCP/IP&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;Postgres port 5432&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=13;" vertex="1" connectable="0" parent="jbzTZwGT330Ku82LHtjQ-24">
+          <mxGeometry x="0.0546" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6a7d8f32e03d9370-15" value="Apache" style="verticalLabelPosition=top;aspect=fixed;html=1;verticalAlign=bottom;strokeColor=none;shape=mxgraph.citrix.cache_server;fillColor=#66B2FF;gradientColor=#0066CC;fontSize=14;labelPosition=center;align=center;" parent="1" vertex="1">
+          <mxGeometry x="895.28" y="160" width="100" height="137.32" as="geometry" />
+        </mxCell>
+        <mxCell id="6a7d8f32e03d9370-62" value="Alvo architecture" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="1" vertex="1">
+          <mxGeometry x="330" y="30" width="861" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-20" value="&lt;div&gt;REST API&lt;/div&gt;&lt;div&gt;Port 8443&lt;br&gt;&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;" parent="1" source="jbzTZwGT330Ku82LHtjQ-1" target="6a7d8f32e03d9370-15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="Cve-search" id="jbzTZwGT330Ku82LHtjQ-1">
+          <mxCell style="verticalLabelPosition=top;sketch=0;aspect=fixed;html=1;verticalAlign=bottom;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.radius_server;labelPosition=center;fontSize=14;" parent="1" vertex="1">
+            <mxGeometry x="1130" y="164.39" width="107.86" height="130" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="jbzTZwGT330Ku82LHtjQ-2" target="jbzTZwGT330Ku82LHtjQ-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="927.5" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-2" value="Postgres" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database_server;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="887.5" y="437" width="115.56" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="jbzTZwGT330Ku82LHtjQ-3" target="jbzTZwGT330Ku82LHtjQ-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-3" value="Kali" style="verticalLabelPosition=top;sketch=0;aspect=fixed;html=1;verticalAlign=bottom;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.license_server;fontSize=14;labelPosition=center;" parent="1" vertex="1">
+          <mxGeometry x="480" y="164.25" width="99.41" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-23" value="TCP/IP UDP" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=13;" parent="1" source="jbzTZwGT330Ku82LHtjQ-4" target="jbzTZwGT330Ku82LHtjQ-3" edge="1">
+          <mxGeometry x="0.0064" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-4" value="Metasploitable" style="verticalLabelPosition=top;sketch=0;aspect=fixed;html=1;verticalAlign=bottom;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.tower_server;labelPosition=center;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="250" y="164.25" width="99.41" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-18" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;TCP/IP&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;Postgres port 5432&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;fontSize=13;" parent="1" source="jbzTZwGT330Ku82LHtjQ-7" target="jbzTZwGT330Ku82LHtjQ-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-7" value="Python, HTML, CSS, JavaScript" style="whiteSpace=wrap;html=1;fontSize=13;textShadow=1;" parent="1" vertex="1">
+          <mxGeometry x="900.03" y="300" width="90.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-12" value="MongoDB" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database_server;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="1060" y="360" width="115.56" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-13" value="Redis" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database_server;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="1191" y="360" width="115.56" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-14" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;TCP/IP&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;Port 6379&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;/div&gt;" style="endArrow=classic;startArrow=classic;html=1;rounded=0;labelBackgroundColor=none;fontSize=13;" parent="1" source="jbzTZwGT330Ku82LHtjQ-12" target="jbzTZwGT330Ku82LHtjQ-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1150" y="307.5" as="sourcePoint" />
+            <mxPoint x="1200" y="257.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jbzTZwGT330Ku82LHtjQ-15" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;TCP/IP&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;Port 27017&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;/div&gt;" style="endArrow=classic;startArrow=classic;html=1;rounded=0;labelBackgroundColor=none;fontSize=13;" parent="1" source="jbzTZwGT330Ku82LHtjQ-13" target="jbzTZwGT330Ku82LHtjQ-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1160" y="370" as="sourcePoint" />
+            <mxPoint x="1207" y="268" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
