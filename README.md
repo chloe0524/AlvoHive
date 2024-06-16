@@ -26,7 +26,8 @@ The goal is to create a tool to extract data gathered during a penetration test 
 ![PostgreSQL](https://img.shields.io/badge/postgresql-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
 - Kali Linux *VM*: Provides tools for pentesters/ethical hackers.\
-    &#x21B3; (https://www.kali.org/get-kali/#kali-virtual-machines)\
+    &#x21B3; (https://www.kali.org/get-kali/#kali-virtual-machines)
+    \
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [VM installation and configuration Kali](documentation_infra/Kali_VirtualBox.md)
 
 
