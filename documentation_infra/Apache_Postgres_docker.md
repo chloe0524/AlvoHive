@@ -73,10 +73,10 @@ services:
       - '443:443'
     volumes:
       - "$HOME/AlvoHive/web:/var/www/html"
-	  #- "$HOME/AlvoHive/apache2/apache2.conf:/etc/apache2/apache2.conf"
+    #- "$HOME/AlvoHive/apache2/apache2.conf:/etc/apache2/apache2.conf"
     networks:
       - postgres
-	  - cverest
+      - cverest
 
   postgres:
     image: ubuntu/postgres:14-22.04_beta
