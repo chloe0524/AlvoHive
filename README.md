@@ -48,9 +48,6 @@
 \
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [Docker image installation, configuration and runtime PostgreSQL](documentation_infra/Apache_Postgres_docker.md)
 
-- PostgreSQL *Docker*: Database for the front-end and back-end.
-\
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; <a href="documentation_infra/Apache_Postgres_docker.md" target="_blank">Docker image installation, configuration and runtime PostgreSQL</a>
 
 ### Architecture
 ![AlvoHive_archi](https://github.com/chloe0524/AlvoHive/assets/127857895/818aa976-346e-4036-958e-4c86eed8cf39)
