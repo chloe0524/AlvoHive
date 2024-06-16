@@ -27,17 +27,20 @@ The goal is to create a tool to extract data gathered during a penetration test 
 
 - Kali Linux *VM*: Provides tools for pentesters/ethical hackers.\
     &#x21B3; (https://www.kali.org/get-kali/#kali-virtual-machines)\
-    ![VM installation and configuration](documentation_infra/Kali_VirtualBox.md)
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [VM installation and configuration Kali](documentation_infra/Kali_VirtualBox.md)
 
 - Metasploitable2 *VM*: Vulnerable Linux environment.\
-    &#x21B3; (https://sourceforge.net/projects/metasploitable/files/Metasploitable2/)
+    &#x21B3; (https://sourceforge.net/projects/metasploitable/files/Metasploitable2/)\
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [VM installation and configuration Metasploitable2](documentation_infra/Metasploitable_VirtualBox.md)
 
 - CVE-Search *Docker*:  Tool used to import CVEs details in a local MongoDB. Provides REST API access.\
-    &#x21B3; (https://sourceforge.net/projects/metasploitable/files/Metasploitable2/)
+    &#x21B3; (https://github.com/cve-search/cve-search)\
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [Docker image installation, configuration and runtime](documentation_infra/Cve-search_docker.md)
 
-- Apache + Python *Docker*: Apache HTTP server and Python for the back-end development.
-
-- PostgreSQL *Docker*: Database for the front-end and back-end.
+- Apache + Python *Docker*: Apache HTTP server and Python for the back-end development.\
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [Docker image installation, configuration and runtime Apache](documentation_infra/Apache_Postgres_docker.md)
+- PostgreSQL *Docker*: Database for the front-end and back-end.\
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [Docker image installation, configuration and runtime PostgreSQL](documentation_infra/Apache_Postgres_docker.md)
 
 ### Architecture
 ![AlvoHive_archi](https://github.com/chloe0524/AlvoHive/assets/127857895/818aa976-346e-4036-958e-4c86eed8cf39)
