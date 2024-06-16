@@ -32,16 +32,20 @@ The goal is to create a tool to extract data gathered during a penetration test 
 
 
 - Metasploitable2 *VM*: Vulnerable Linux environment.\
-    &#x21B3; (https://sourceforge.net/projects/metasploitable/files/Metasploitable2/)\
+    &#x21B3; (https://sourceforge.net/projects/metasploitable/files/Metasploitable2/)
+    \
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [VM installation and configuration Metasploitable2](documentation_infra/Metasploitable_VirtualBox.md)
 
 - CVE-Search *Docker*:  Tool used to import CVEs details in a local MongoDB. Provides REST API access.\
-    &#x21B3; (https://github.com/cve-search/cve-search)\
+    &#x21B3; (https://github.com/cve-search/cve-search)
+    \
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [Docker image installation, configuration and runtime](documentation_infra/Cve-search_docker.md)
 
-- Apache + Python *Docker*: Apache HTTP server and Python for the back-end development.\
+- Apache + Python *Docker*: Apache HTTP server and Python for the back-end development.
+\
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [Docker image installation, configuration and runtime Apache](documentation_infra/Apache_Postgres_docker.md)
-- PostgreSQL *Docker*: Database for the front-end and back-end.\
+- PostgreSQL *Docker*: Database for the front-end and back-end.
+\
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [Docker image installation, configuration and runtime PostgreSQL](documentation_infra/Apache_Postgres_docker.md)
 
 ### Architecture
