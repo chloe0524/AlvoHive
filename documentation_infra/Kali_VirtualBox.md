@@ -62,37 +62,3 @@ With OS user kali:
 kali$ psql -U msf -h IP_ADDRESS
 ```
 This will prompt for the previously identified password.
-
-## Data migration with SSH
-
-```bash
-$ ssh kali@IP_ADDRESS 'PGPASSWORD="jhu97O5W2IMI9XzpNKD/J50szUSmuh/WAaXB7/Cuad0=" pg_dump -U msf -h IP_ADDRESS --table services --table hosts | PGPASSWORD=alvo psql -U alvo -p 5432 -h postgres -d alvo_db'
-```
-
-This command will:
-
-1. SSH into the Kali VM at `IP_ADDRESS`.
-2. Set the Postgres password for the msf user using the `PGPASSWORD` environment variable (avoiding manual entry).
-3. Use `pg_dump` to export the `services` and `hosts` tables from the `msf` user database.
-4. `|` -> Pipe the dumped data to another Postgres instance:
-   - Set the Postgres password for the `alvo` user.
-   - Use `psql` to import the data into the `alvo_db` database.
-
-### Explanation of components:
-- `PGPASSWORD="jhu97O5W2IMI9XzpNKD/J50szUSmuh/WAaXB7/Cuad0="`: Passes the password in a variable to avoid manual input.
-- `pg_dump`: Postgres tool for exporting data.
-- `-U msf`: Postgres username.
-- `-h `IP_ADDRESS`: Host address.
-- `--table services --table hosts`: List of tables to dump.
-- `|`: Standard pipe to pass output to another command.
-- `PGPASSWORD=alvo`: Passes the password for the database.
-- `psql`: Standard Postgres command-line tool.
-- `-U alvo`: Postgres username.
-- `-p 5432`: Port (default is 5432, so this is optional).
-- `-h postgres`: Hostname (Docker resolves this to the correct container).
-- `-d alvo_db`: database name.
-
-
-
-
-
