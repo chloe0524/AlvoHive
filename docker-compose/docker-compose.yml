@@ -1,23 +1,42 @@
 services:
-  apache:
-    image: apache
+  apache:    
     container_name: apache-AlvoHive
     build:
       context: .
       dockerfile: docker/images/apache/dockerfile-apache
     hostname: apache
-    restart: always
+    restart: unless-stopped
     environment:
       - TZ=Europe/Paris
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - "/home/chloe/holberton/AlvoHive/web:/var/www/html"
+      - "$HOME/AlvoHive/web:/var/www/html"
+      - "$HOME/AlvoHive/apache2/apache2.conf:/etc/apache2/apache2.conf"
     networks:
-      - kali
+      - postgres
+      - cverest
+
+  postgres:
+    image: ubuntu/postgres:14-22.04_beta
+    container_name: postgres-AlvoHive
+    hostname: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=alvo
+      - POSTGRES_USER=alvo
+      - POSTGRES_DB=alvo_db
+      - TZ=Europe/Paris
+    ports:
+      - '5432:5432'
+    volumes:
+      - "$HOME/AlvoHive/pgdata:/var/lib/postgresql/data"
+    networks:
       - postgres
 
 networks:
-  kali:
   postgres:
+  cverest:
+    name: cve-search-docker_frontend
+    external: true

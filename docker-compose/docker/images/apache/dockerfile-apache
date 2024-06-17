@@ -1,7 +1,7 @@
 FROM ubuntu/apache2:latest
 RUN apt-get update
-RUN apt-get install -y python3 pip iproute2 net-tools inetutils-ping openssh-client postgresql-client vim
-# Enable SSL
+RUN apt-get install -y python3 python3-requests pip iproute2 net-tools inetutils-ping openssh-client postgresql-client vim curl
+# Enable Apache SSL
 RUN set -eux; \
     apt-get update; \
     apt-get install ssl-cert; \
