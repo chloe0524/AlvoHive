@@ -85,15 +85,12 @@ This command will:
 - `-h `IP_ADDRESS`: Host address.
 - `--table services --table hosts`: List of tables to dump.
 - `|`: Standard pipe to pass output to another command.
-- `PGPASSWORD=alvo`: Passes the password for the target database.
+- `PGPASSWORD=alvo`: Passes the password for the database.
 - `psql`: Standard Postgres command-line tool.
-- `-U alvo`: Target Postgres username.
+- `-U alvo`: Postgres username.
 - `-p 5432`: Port (default is 5432, so this is optional).
 - `-h postgres`: Hostname (Docker resolves this to the correct container).
-- `-d alvo_db`: Target database name.
-
-This process will transfer the `services` and `hosts` tables from the Metasploit database in Kali to the `alvo_db` database on the target Postgres instance.
-
+- `-d alvo_db`: database name.
 
 
 
