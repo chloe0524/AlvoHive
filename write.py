@@ -29,6 +29,35 @@ def execute_query_and_write_to_md(query, headers, mdFile):
         if connection:
             connection.close()
 
+def fetch_cpe_and_query_api(mdFile):
+    try:
+        connection = psycopg2.connect(**db_params)
+        cursor = connection.cursor()
+        cursor.execute("SELECT cpe FROM service_version WHERE id_hosts=1")
+        cpes = cursor.fetchall()
+        
+        for cpe_row in cpes:
+            cpe = cpe_row[0]
+            url = f"https://localhost:8443/api/cvefor/{cpe}"
+            headers = {
+                'X-Api-Key': 'f06b8e71-9eda-46e5-9dd9-1b73d18440ce'
+            }
+            response = requests.get(url, headers=headers, verify=False)
+            cves = response.json()  # parse the response as JSON
+            
+            for cve in cves:
+                # Write the CVE summary and cvss to the markdown file
+                mdFile.new_paragraph(f"CVE for {cpe}:")
+                mdFile.new_paragraph(f"Summary: {cve['summary']}")
+                mdFile.new_paragraph(f"CVSS: {cve['cvss']}")
+        
+        cursor.close()
+    except (Exception, Error) as error:
+        print("Error while connecting to PostgreSQL", error)
+    finally:
+        if connection:
+            connection.close()
+
 mdFile = mdutils.MdUtils(file_name='r', title='Query Results')
 
 query1 = """
@@ -56,12 +85,6 @@ query3 = """
 headers3 = ["CPE"]
 execute_query_and_write_to_md(query3, headers3, mdFile)
 
-mdFile.create_md_file()
+fetch_cpe_and_query_api(mdFile)
 
-cpe = "cpe:2.3:a:pureftpd:pureftpd:1.0.13a:::::::*"
-url = "https://localhost:8443/api/cwe/<cwe_id>"
-headers = {
-    'X-Api': 'beea668b-e1fb-48b6-a279-3f96073de90f'
-}
-response = requests.get(url, headers=headers, verify=False)
-print(response.text)
+mdFile.create_md_file()
