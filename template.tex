@@ -1,0 +1,50 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{ifthen} % For conditional statements
+\usepackage{longtable} % For tables that span multiple pages
+\usepackage{booktabs} % For better-looking tables
+\usepackage{fontspec} % For custom fonts
+\usepackage{lipsum} % For dummy text
+
+% Define blue and red colors
+\definecolor{headerblue}{RGB}{0, 1, 139}
+\definecolor{criticalred}{RGB}{255, 0, 0}
+
+% Set up header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{
+    \begin{tikzpicture}[remember picture, overlay]
+        \fill[headerblue] (current page.north west) rectangle ([yshift=-2cm]current page.north east);
+        \ifthenelse{\value{page}>1}{\vspace*{2\baselineskip}}{} % Add 2 line breaks if page number is greater than 1
+    \end{tikzpicture}
+}
+\fancyfoot[C]{
+    \begin{tikzpicture}[remember picture, overlay]
+        \fill[headerblue] (current page.south west) rectangle ([yshift=2cm]current page.south east);
+        \node[anchor=south, yshift=0.5cm] at (current page.south) {\color{white} \bfseries \thepage}; % Bold page number
+    \end{tikzpicture}
+}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Set Helvetica as the main font
+\setmainfont{Helvetica}
+
+\begin{document}
+
+% Title section with lower position
+\begin{center}
+    \vspace*{1cm} % Adjust vertical space
+    {\Huge\textbf{Pentests Results}} % Title in bold and larger font
+    \vspace*{1cm}
+\end{center}
+
+$body$
+
+\end{document}
