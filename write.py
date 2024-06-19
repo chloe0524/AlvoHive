@@ -28,13 +28,14 @@ def execute_query_and_write_to_md(query, headers, mdFile):
     finally:
         if connection:
             connection.close()
-
 def fetch_cpe_and_query_api(mdFile):
     try:
         connection = psycopg2.connect(**db_params)
         cursor = connection.cursor()
         cursor.execute("SELECT cpe FROM service_version WHERE id_hosts=1")
         cpes = cursor.fetchall()
+        
+        first_cve = True  # Initialize first_cve to True
         
         for cpe_row in cpes:
             cpe = cpe_row[0]
@@ -46,8 +47,12 @@ def fetch_cpe_and_query_api(mdFile):
             cves = response.json()  # parse the response as JSON
             
             for cve in cves:
-                # Write the CVE summary and cvss to the markdown file
-                mdFile.new_paragraph(f"--> CVE for {cpe}:")
+                # Write the CVE ID, summary and cvss to the markdown file
+                if first_cve:
+                    mdFile.new_paragraph("## Details")
+                    first_cve = False
+                mdFile.new_paragraph(f"{cve['id']}")
+                mdFile.new_paragraph(f"--> CVE for {cpe} ({cve['id']}):")
                 mdFile.new_paragraph(f"Summary: {cve['summary']}")
                 mdFile.new_paragraph(f"CVSS: {cve['cvss']}")
                 mdFile.new_paragraph("---")  # Add a horizontal line
