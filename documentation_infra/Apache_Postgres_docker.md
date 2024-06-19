@@ -206,7 +206,7 @@ root@apache:/#
 root@postgres:/#
 ```
 
-## Data migration with SSH
+### Data migration with SSH
 
 ```bash
 $ ssh kali@IP_ADDRESS 'PGPASSWORD="jhu97O5W2IMI9XzpNKD/J50szUSmuh/WAaXB7/Cuad0=" pg_dump -U msf -h IP_ADDRESS --table services --table hosts | PGPASSWORD=alvo psql -U alvo -p 5432 -h postgres -d alvo_db'
