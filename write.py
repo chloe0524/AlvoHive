@@ -28,6 +28,7 @@ def execute_query_and_write_to_md(query, headers, mdFile):
     finally:
         if connection:
             connection.close()
+
 def fetch_cpe_and_query_api(mdFile):
     try:
         connection = psycopg2.connect(**db_params)
@@ -51,11 +52,10 @@ def fetch_cpe_and_query_api(mdFile):
                 if first_cve:
                     mdFile.new_paragraph("## Details")
                     first_cve = False
-                mdFile.new_paragraph(f"{cve['id']}")
+                mdFile.new_paragraph(f"## {cve['id']}")
                 mdFile.new_paragraph(f"--> CVE for {cpe} ({cve['id']}):")
                 mdFile.new_paragraph(f"Summary: {cve['summary']}")
                 mdFile.new_paragraph(f"CVSS: {cve['cvss']}")
-                mdFile.new_paragraph("---")  # Add a horizontal line
         
         cursor.close()
     except (Exception, Error) as error:
