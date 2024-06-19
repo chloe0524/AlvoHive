@@ -47,9 +47,10 @@ def fetch_cpe_and_query_api(mdFile):
             
             for cve in cves:
                 # Write the CVE summary and cvss to the markdown file
-                mdFile.new_paragraph(f"CVE for {cpe}:")
+                mdFile.new_paragraph(f"--> CVE for {cpe}:")
                 mdFile.new_paragraph(f"Summary: {cve['summary']}")
                 mdFile.new_paragraph(f"CVSS: {cve['cvss']}")
+                mdFile.new_paragraph("---")  # Add a horizontal line
         
         cursor.close()
     except (Exception, Error) as error:
