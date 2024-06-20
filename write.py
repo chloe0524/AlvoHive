@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import subprocess
+import os
 import psycopg2
 from psycopg2 import Error
 import mdutils
@@ -30,9 +32,9 @@ def execute_query_and_write_to_md(query, headers, mdFile):
             connection.close()
 
 def fetch_cpe_and_query_api(mdFile):
-    data = []  # Initialize data
-    details = []  # Initialize details
-    first_cve = True  # Initialize first_cve to True
+    there_is_data = []
+    details = []
+    first_cve = True 
 
     try:
         connection = psycopg2.connect(**db_params)
@@ -47,23 +49,26 @@ def fetch_cpe_and_query_api(mdFile):
                 'X-Api-Key': 'beea668b-e1fb-48b6-a279-3f96073de90f'
             }
             response = requests.get(url, headers=headers, verify=False)
-            cves = response.json()  # parse the response as JSON
+            cves = response.json()
             
             for cve in cves:
                 try:
-                    cvss = float(cve.get('cvss', 0))  # Get CVSS and default to 0 if not found
-                    if cvss >= 9.0:
-                        data.append([cve['id'], cvss])  # Add to data list
+                    cvss = float(cve.get('cvss', 0))
+                    if cvss >= 8.9:
+                        # Add to data table
+                        there_is_data.append([f"[CVE-{cve['id']}](#{cve['id']})", f"<span style='color:red;'>{cvss}</span>"])
+                        
+                        # Add to details section
+                        if first_cve:
+                            details.append("\n# Details\n")
+                            first_cve = False
+                        details.append(f"## {cve.get('id', 'Unknown ID')}\n")
+                        details.append(f"--> CVE for {cpe} ({cve.get('id', 'Unknown ID')}):\n")
+                        details.append(f"Summary: {cve.get('summary', 'No summary available')}\n")
+                        details.append(f"CVSS: <span style='color:red;'>{cve.get('cvss', 'N/A')}</span>\n")
+                        details.append(f"<a name='{cve['id']}'>CVE-{cve['id']}</a>\n")
                 except Exception as e:
                     print(f"Error processing CVE data: {e}")
-                
-                if first_cve:
-                    details.append("\n## Details\n")  # Add a newline before the "Details" title
-                    first_cve = False
-                details.append(f"## {cve.get('id', 'Unknown ID')}\n")
-                details.append(f"--> CVE for {cpe} ({cve.get('id', 'Unknown ID')}):\n")
-                details.append(f"Summary: {cve.get('summary', 'No summary available')}\n")
-                details.append(f"CVSS: {cve.get('cvss', 'N/A')}\n")
         
         cursor.close()
     except (Exception, Error) as error:
@@ -72,19 +77,20 @@ def fetch_cpe_and_query_api(mdFile):
         if connection:
             connection.close()
 
-    if data:  # Only create the table if there is data
+    if there_is_data:
         headers = ["CVE", "Critical Severity"]
-        mdFile.new_table(columns=2, rows=len(data)+1, text=headers+sum(data, []), text_align='left')
+        mdFile.new_table(columns=2, rows=len(there_is_data)+1, text=headers+sum(there_is_data, []), text_align='left')
     
     return details
 
-mdFile = mdutils.MdUtils(file_name='report')
 
-# Fetch CVE data and query API
-mdFile.new_header(level=1, title="WARNING:")
+mdFile = mdutils.MdUtils(file_name='report', title='')
+
+
+mdFile.new_header(level=1, title="WARNING")
 details_section = fetch_cpe_and_query_api(mdFile)
 
-# Execute and write other queries to markdown file
+
 query1 = """
     SELECT company_name, first_name, last_name
     FROM company, contact
@@ -112,6 +118,7 @@ execute_query_and_write_to_md(query3, headers3, mdFile)
 
 mdFile.create_md_file()
 
-# Combine the markdown content with details section at the end
 with open('report.md', 'a') as md_file:
     md_file.write("\n".join(details_section))
+
+subprocess.run(['pandoc', 'report.md', '-o', 'report.pdf', '--template=template.tex', '--pdf-engine=xelatex'])
