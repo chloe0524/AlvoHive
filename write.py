@@ -46,7 +46,7 @@ def fetch_cpe_and_query_api(mdFile):
             cpe = cpe_row[0]
             url = f"https://localhost:8443/api/cvefor/{cpe}"
             headers = {
-                'X-Api-Key': 'beea668b-e1fb-48b6-a279-3f96073de90f'
+                'X-Api-Key': 'key'
             }
             response = requests.get(url, headers=headers, verify=False)
             cves = response.json()
