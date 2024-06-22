@@ -46,7 +46,7 @@ def fetch_cpe_and_query_api(mdFile):
             cpe = cpe_row[0]
             url = f"https://localhost:8443/api/cvefor/{cpe}"
             headers = {
-                'X-Api-Key': 'beea668b-e1fb-48b6-a279-3f96073de90f'
+                'X-Api-Key': 'key'
             }
             response = requests.get(url, headers=headers, verify=False)
             cves = response.json()
@@ -55,18 +55,14 @@ def fetch_cpe_and_query_api(mdFile):
                 try:
                     cvss = float(cve.get('cvss', 0))
                     if cvss >= 8.9:
-                        # Add to data table
                         there_is_data.append([f"[CVE-{cve['id']}](#{cve['id']})", f"<span style='color:red;'>{cvss}</span>"])
-                        
-                        # Add to details section
-                        if first_cve:
-                            details.append("\n# Details\n")
-                            first_cve = False
-                        details.append(f"## {cve.get('id', 'Unknown ID')}\n")
-                        details.append(f"--> CVE for {cpe} ({cve.get('id', 'Unknown ID')}):\n")
-                        details.append(f"Summary: {cve.get('summary', 'No summary available')}\n")
-                        details.append(f"CVSS: <span style='color:red;'>{cve.get('cvss', 'N/A')}</span>\n")
-                        details.append(f"<a name='{cve['id']}'>CVE-{cve['id']}</a>\n")
+                    if first_cve:
+                        details.append("\n# Details\n")
+                        first_cve = False
+                    details.append(f"## {cve.get('id', 'Unknown ID')}\n")
+                    details.append(f" !--> CVE for {cpe}\n")
+                    details.append(f"Summary: {cve.get('summary', 'No summary available')}\n")
+                    details.append(f"\n\n\\textbf{{\\textcolor{{red}}{{CVSS: {cve.get('cvss', 'N/A')}}}}}\n\n")
                 except Exception as e:
                     print(f"Error processing CVE data: {e}")
         
@@ -86,10 +82,8 @@ def fetch_cpe_and_query_api(mdFile):
 
 mdFile = mdutils.MdUtils(file_name='report', title='')
 
-
 mdFile.new_header(level=1, title="WARNING")
 details_section = fetch_cpe_and_query_api(mdFile)
-
 
 query1 = """
     SELECT company_name, first_name, last_name
@@ -121,4 +115,4 @@ mdFile.create_md_file()
 with open('report.md', 'a') as md_file:
     md_file.write("\n".join(details_section))
 
-subprocess.run(['pandoc', 'report.md', '-o', 'report.pdf', '--template=template.tex', '--pdf-engine=xelatex'])
+subprocess.run(['pandoc', 'report.md', '-o', 'report.pdf', '--template=template.tex', '--pdf-engine=lualatex'])
