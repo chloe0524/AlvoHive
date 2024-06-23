@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+
 import subprocess
 import os
 import psycopg2
@@ -6,6 +7,7 @@ from psycopg2 import Error
 import mdutils
 import requests
 
+# Database parameters
 db_params = {
     "host": "localhost",
     "port": 5432,
@@ -14,6 +16,7 @@ db_params = {
     "password": "alvo"
 }
 
+# Function to execute query and write to markdown
 def execute_query_and_write_to_md(query, headers, mdFile):
     try:
         connection = psycopg2.connect(**db_params)
@@ -31,6 +34,7 @@ def execute_query_and_write_to_md(query, headers, mdFile):
         if connection:
             connection.close()
 
+# Function to fetch CPE and query API for CVE data
 def fetch_cpe_and_query_api(mdFile):
     there_is_data = []
     details = []
@@ -79,12 +83,9 @@ def fetch_cpe_and_query_api(mdFile):
     
     return details
 
-
 mdFile = mdutils.MdUtils(file_name='report', title='')
 
-mdFile.new_header(level=1, title="WARNING")
-details_section = fetch_cpe_and_query_api(mdFile)
-
+# Query for company and contact information
 query1 = """
     SELECT company_name, first_name, last_name
     FROM company, contact
@@ -93,6 +94,7 @@ query1 = """
 headers1 = ["Company Name", "First Name", "Last Name"]
 execute_query_and_write_to_md(query1, headers1, mdFile)
 
+# Query for host and service version information
 query2 = """
     SELECT name, os_name, os_sp
     FROM hosts, service_version
@@ -102,6 +104,10 @@ query2 = """
 headers2 = ["Name", "OS Name", "OS SP"]
 execute_query_and_write_to_md(query2, headers2, mdFile)
 
+# Fetch CVE data and process it
+details_section = fetch_cpe_and_query_api(mdFile)
+
+# Now, query for CPE information after processing CVE data
 query3 = """
     SELECT cpe
     FROM service_version
@@ -110,9 +116,14 @@ query3 = """
 headers3 = ["CPE"]
 execute_query_and_write_to_md(query3, headers3, mdFile)
 
+# Finalize markdown file
 mdFile.create_md_file()
 
+# Append additional details to the markdown file
 with open('report.md', 'a') as md_file:
     md_file.write("\n".join(details_section))
 
+# Convert markdown to PDF and run additional scripts
 subprocess.run(['pandoc', 'report.md', '-o', 'report.pdf', '--template=template.tex', '--pdf-engine=lualatex'])
+subprocess.run(['./bar_chart.py'])
+subprocess.run(['./pie_graphic.py'])
