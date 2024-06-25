@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlvoHive</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+    <header>
+        <div class="options">
+            <a href="#" class="logo">
+                <span>AlvoHive</span>
+            </a>            
+            <ul class="navbar">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <input type="checkbox" name="" id="menu">
+            <label for="menu"><i id="menu-icon" class='bx bx-menu' style='color:#20586d'></i></label>
+            <nav class="nav">
+                <ul>
+                    <li><a href="login.html">Sign up / Log in</a></li>
+                </ul>
+            </nav>
+        </div> 
+    </header>
+
+    <section class="background-container">
+        <img src="images/logo_left_back.png" alt="Large Logo" class="large-logo">
+    </section>
+
+    <section class="text-boxes">
+        <div class="text-box">
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies se</p>
+        </div>
+        <br>
+        <br>
+        <div class="text-box">
+            <p class="text">Cras elementum ultrices diam. MaecenaLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies ses ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie.</p>
+        </div>
+        <br>
+        <br>
+        <div class="text-box">
+            <p class="text">Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies se</p>
+        </div>
+        <br>
+        <br>
+        <div class="text-box">
+            <p class="text">Ut pharetra augue nec augue. Nam elit agna, endrerit sit amet, tincidunt ac, viverra sed, nulla. Donec porta diam eu massa. Quisque diam lorem.</p>
+        </div>
+    </section>
+    <footer id="footer"></footer>
+
+    <script>
+        window.addEventListener('load', function() {
+            var backgroundImage = document.querySelector('.background-container img');
+            var footer = document.getElementById('footer');
+            
+            function positionFooter() {
+                var imageHeight = backgroundImage.offsetHeight;
+                footer.style.top = imageHeight + 'px';
+            }
+
+            positionFooter();
+            window.addEventListener('resize', positionFooter);
+        });
+    </script>
+</body>
+<footer id="footer"></footer>
+</html>
