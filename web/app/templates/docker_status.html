@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Docker Containers</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Base styles */
+        body {
+            background: white;
+            font-family: 'Roboto', sans-serif; /* Default font */
+        }
+
+        img.alvo-logo {
+            border: none;
+            box-shadow: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: inherit;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+
+        th {
+            background-color: darkblue;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-of-type(even) td {
+            background: #fff;
+        }
+
+        tr:nth-of-type(odd) td {
+            background: rgb(245, 251, 253);
+        }
+
+        /* Header styles */
+        h1, h2 {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 0;
+            width: 100%;
+            color: darkblue;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+
+        h1::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            bottom: -20px;
+            background-image: url('../static/images/back_header-image.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(6px);
+            z-index: -1;
+        }
+
+        /* Specific styles */
+        .gridjs-th {
+            background-color: darkblue !important;
+            color: white !important;
+            font-weight: bold !important;
+        }
+
+        button, table td button {
+            border: none;
+            background: transparent;
+            padding: 0;
+        }
+
+        /* Section styles */
+        #processes-section {
+            margin-top: 20px;
+        }
+
+        #container-top table {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Docker Containers</h1>
+    <br>
+    <hr>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Top</th>
+                <th>Image</th>
+                <th>Command</th>
+                <th>Status</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for container in containers %}
+            <tr>
+                <td><button onclick="showTop('{{ container.Id }}')"><img src="/static/images/alvo_logo.png" class="alvo-logo"></button></td>
+                <td>{{ container.Image }}</td>
+                <td>{{ container.Command }}</td>
+                <td>{{ container.Status }}</td>
+                <td>{{ container.Names[0] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div id="processes-section" style="display: none;">
+        <h2>Container Processes</h2>
+        <div id="container-top"></div>
+    </div>
+
+    <script>
+        function showTop(containerId) {
+            // Show the processes section
+            document.getElementById('processes-section').style.display = 'block';
+    
+            fetch('/top/' + containerId)
+                .then(response => response.json())
+                .then(data => {
+                    let topHtml = '<table><thead><tr>';
+                    data.Titles.forEach(title => {
+                        topHtml += '<th>' + title + '</th>';
+                    });
+                    topHtml += '</tr></thead><tbody>';
+                    data.Processes.forEach(process => {
+                        topHtml += '<tr>';
+                        process.forEach(item => {
+                            topHtml += '<td>' + item + '</td>';
+                        });
+                        topHtml += '</tr>';
+                    });
+                    topHtml += '</tbody></table>';
+                    document.getElementById('container-top').innerHTML = topHtml;
+                });
+        }
+    </script>
+</body>
+</html>
