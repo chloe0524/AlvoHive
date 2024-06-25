@@ -1,0 +1,83 @@
+/* Base styles */
+body {
+   background: white;
+   font-family: 'Roboto', sans-serif; /* Default font */
+}
+
+img.alvo-logo {
+   border: none;
+   box-shadow: none;
+}
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+   font-family: inherit;
+}
+
+th, td {
+   padding: 8px 12px;
+   border: 1px solid #ccc;
+   font-family: inherit;
+}
+
+th {
+   background-color: darkblue;
+   color: white;
+   font-weight: bold;
+}
+
+tr:nth-of-type(even) td {
+   background: #fff;
+}
+
+tr:nth-of-type(odd) td {
+   background: rgb(245, 251, 253);
+}
+
+/* Header styles */
+h1, h2 {
+   position: relative;
+   z-index: 2;
+   margin-bottom: 0;
+   width: 100%;
+   color: darkblue;
+   padding: 10px 0;
+   font-weight: bold;
+}
+
+h1::before {
+   content: '';
+   position: absolute;
+   top: -20px;
+   left: 0;
+   right: 0;
+   bottom: -20px;
+   background-image: url('../static/images/back_header-image.png');
+   background-size: cover;
+   background-position: center;
+   filter: blur(6px);
+   z-index: -1;
+}
+
+/* Specific styles */
+.gridjs-th {
+   background-color: darkblue !important;
+   color: white !important;
+   font-weight: bold !important;
+}
+
+button, table td button {
+   border: none;
+   background: transparent;
+   padding: 0;
+}
+
+/* Section styles */
+#processes-section {
+   margin-top: 20px;
+}
+
+#container-top table {
+   margin-top: 10px;
+}
