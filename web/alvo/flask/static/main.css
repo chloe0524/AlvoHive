@@ -1,0 +1,276 @@
+/* Base styles */
+body {
+   background: white;
+   font-family: 'Roboto', sans-serif; /* Default font */
+}
+
+img.alvo-logo {
+   border: none;
+   box-shadow: none;
+}
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+   font-family: inherit;
+}
+
+th, td {
+   padding: 8px 12px;
+   border: 1px solid #ccc;
+   font-family: inherit;
+}
+
+th {
+   background-color: darkblue;
+   color: white;
+   font-weight: bold;
+}
+
+tr:nth-of-type(even) td {
+   background: #fff;
+}
+
+tr:nth-of-type(odd) td {
+   background: rgb(245, 251, 253);
+}
+
+/* Header styles */
+h1, h2 {
+   position: relative;
+   z-index: 2;
+   margin-bottom: 0;
+   width: 100%;
+   color: darkblue;
+   padding: 10px 0;
+   font-weight: bold;
+}
+
+h1::before {
+   content: '';
+   position: absolute;
+   top: -20px;
+   left: 0;
+   right: 0;
+   bottom: -20px;
+   background-image: url('../static/images/back_header-image.png');
+   background-size: cover;
+   background-position: center;
+   filter: blur(6px);
+   z-index: -1;
+}
+
+/* Specific styles */
+.gridjs-th {
+   background-color: darkblue !important;
+   color: white !important;
+   font-weight: bold !important;
+}
+
+button, table td button {
+   border: none;
+   background: transparent;
+   padding: 0;
+}
+
+/* Section styles */
+#processes-section {
+   margin-top: 20px;
+}
+
+#container-top table {
+   margin-top: 10px;
+}
+
+.container {
+   display: flex;
+   height: 100%;
+   width: 100%;
+   padding-right: 0;
+   margin-left: -20px;
+}
+
+.sidebar {
+   width: 60px;
+   height: 45vh;
+   margin-top: 44px;
+   background-color: #00008B;
+   color: white;
+   display: flex;
+   flex-direction: column;
+   padding: 20px 10px; 
+   border-radius: 10px;
+   margin-right: 20px;
+   padding-right: 0;
+   transition: width 0.3s;
+}
+
+.sidebar-links a {
+   display: flex;
+   align-items: center;
+   margin-bottom: 10px;
+   font-size: 1.4rem;
+}
+
+.sidebar-links i {
+   margin-right: 10px;
+}
+.collapsed .sidebar {
+   width: 60px; /* Collapsed sidebar width */
+}
+
+.sidebar-brand {
+   font-size: 1.2rem; /* Adjusted font size for smaller sidebar */
+   margin-bottom: 1rem;
+}
+
+.sidebar-links {
+   display: flex;
+   flex-direction: column;
+}
+
+.nav-link {
+   color: white;
+   text-decoration: none;
+   padding: 10px 0;
+   padding-left: 10px; /* Adjust this value as needed to align with "Home" */
+   margin: 5px 0;
+   transition: background 0.3s;
+   position: relative;
+}
+
+.nav-link:hover {
+   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+   background-color: white;
+   color: #1a478c;
+   border-radius: 15px 0 0 15px;
+   padding-left: 10px; /* Ensure this matches the padding-left of .nav-link */
+}
+
+.nav-link, .home-class {
+   margin-right: 0;
+}
+
+.home-class::before {
+   content: ''; /* Shape or icon */
+}
+
+.main-content {
+   flex-grow: 1;
+   padding: 20px;
+}
+
+.section {
+   margin-bottom: 2rem;
+   background: #fff;
+   padding: 1rem;
+   border-radius: 5px;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.table-container {
+   overflow-x: auto;
+}
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+th, td {
+   padding: 8px 12px;
+   border: 1px solid #ccc;
+}
+
+th {
+   background-color: darkblue;
+   color: white;
+}
+
+tr:nth-of-type(even) {
+   background: #f4f4f4;
+}
+
+.admin-page .container {
+   margin: 0;
+   padding: 0;
+}
+
+.white-box {
+   margin-left: -40px;
+   padding-left: 20px;
+}
+
+.hidden {
+   display: none;
+}
+
+.active {
+   font-weight: bold;
+}
+
+.cell-content {
+   display: block;
+   max-width: 200px; 
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+ }
+
+ .cloud-docs-image {
+   width: 80%;
+   margin-left: 5px;
+}
+
+.sidebar-brand {
+   display: flex;
+   align-items: center;
+   margin-bottom: 20px; /* Adjust spacing if needed */
+}
+
+.sidebar-header {
+   display: flex;
+   align-items: center;
+   background-color: #00008B;
+   padding: 10px;
+   border-radius: 10px;
+   margin-bottom: 20px;
+}
+
+
+.sidebar-container {
+   display: flex;
+   flex-direction: column;
+   margin-right: 20px;
+}
+
+.greeting-box {
+   background-color: #00008B;
+   color: white;
+   display: flex;
+   align-items: center;
+   padding: 15px;
+   border-radius: 10px;
+   margin-top: 70px;
+   margin-bottom: -30px;
+   width: 220px;
+   box-sizing: border-box;
+}
+
+.profile-picture {
+   width: 70px;
+   height: 70px;
+   border-radius: 50%;
+   margin-right: 10px;
+}
+
+.greeting-text {
+   font-weight: bold;
+   font-size: 18px;
+}
+
+
+
