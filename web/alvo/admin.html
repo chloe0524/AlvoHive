@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css">
+
+   <title>Admin Page</title>
+   <link rel="stylesheet" href="flask/static/main.css">
+   <style>
+      .iframe-container {
+         width: 100%;
+         height: 600px;
+         overflow: hidden;
+         margin-left: 0px; /* Adjust margin-left to move the iframe content to the left */
+      }
+
+      .iframe-container iframe {
+         width: 100%;
+         height: 100%; /* Adjust height as needed */
+         border: none;
+         margin-left: 0px; /* Adjust margin-left to align iframe content properly */
+      }
+
+      .sidebar {
+         width: 200px;
+         background-color: #00008B; /* Darker blue */
+         color: white;
+         display: flex;
+         flex-direction: column;
+         padding: 20px;
+         border-radius: 10px;
+         margin-right: 20px;
+         padding-right: 0;
+         transition: width 0.3s; /* Add transition for smooth sidebar animation */
+      }
+
+      .collapsed .sidebar {
+         width: 60px; /* Collapsed sidebar width */
+      }
+
+      .hidden {
+         display: none;
+      }
+
+      .active {
+         font-weight: bold;
+      }
+   </style>
+</head>
+<body class="admin-page">
+   <div class="container">
+      <div class="sidebar-container">
+         <div class="greeting-box">
+            <img src="flask/static/images/picture_face.png" alt="Profile Picture" class="profile-picture">
+            <div class="greeting-text">Hello Chloé!</div>
+         </div>
+         <div class="sidebar">
+            <div class="sidebar-links">
+               <br><br><a href="#docker" class="nav-link"><i class="fab fa-docker"></i>Docker</a><br><br>
+               <a href="#contactSection" class="nav-link"><i class="fas fa-address-book"></i>Contact</a><br><br>
+               <a href="#companySection" class="nav-link"><i class="fa-solid fa-building"></i>Companies</a><br>
+           </div>
+         </div>
+      </div>
+      <div class="main-content">
+         <div id="docker" class="section">
+            <div class="iframe-container">
+               <iframe src="https://localhost/docker_status/" frameborder="0"></iframe>
+            </div>
+         </div>
+         <div id="contactSection" class="section hidden">
+            <!-- Contact List iframe -->
+            <div class="iframe-container">
+               <iframe src="https://localhost/contact_list/" frameborder="0"></iframe>
+            </div>
+         </div>
+         <div id="companySection" class="section hidden">
+            <!-- Company List iframe -->
+            <div class="iframe-container">
+               <iframe src="https://localhost/company_list/" frameborder="0"></iframe>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+       const sections = {
+          'docker': document.getElementById('docker'),
+          'contactSection': document.getElementById('contactSection'),
+          'companySection': document.getElementById('companySection')
+       };
+
+       const navLinks = document.querySelectorAll('.nav-link');
+
+       function showSection(sectionId) {
+          // Hide all sections
+          Object.values(sections).forEach(section => {
+             section.classList.add('hidden');
+          });
+
+          // Show the selected section
+          const selectedSection = sections[sectionId];
+          if (selectedSection) {
+             selectedSection.classList.remove('hidden');
+          }
+       }
+
+       // Initial state from URL hash
+       const initialHash = window.location.hash.substr(1);
+       if (initialHash) {
+          showSection(initialHash);
+          // Set active class on initial link
+          const initialLink = document.querySelector(`.nav-link[href="#${initialHash}"]`);
+          if (initialLink) {
+             initialLink.classList.add('active');
+          }
+       }
+
+       // Event listener for sidebar navigation clicks
+       navLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+             e.preventDefault();
+             const targetId = e.target.getAttribute('href').substring(1);
+             showSection(targetId);
+
+             // Update active class on clicked link
+             navLinks.forEach(link => {
+                link.classList.remove('active');
+             });
+             this.classList.add('active');
+
+             // Update URL hash without scrolling
+             history.replaceState(null, null, `#${targetId}`);
+          });
+       });
+    });
+    </script>
+</body>
+</html>
