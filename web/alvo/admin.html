@@ -12,13 +12,14 @@
          width: 100%;
          height: 600px;
          overflow: hidden;
-         margin-left: 0px; /* Adjust margin-left to move the iframe content to the left */
+         margin-left: 0px;
       }
 
       .iframe-container iframe {
          width: 100%;
-         height: 100%; /* Adjust height as needed */
+         height: 100%;
          border: none;
+         margin-top: -80px;
          margin-left: 0px; /* Adjust margin-left to align iframe content properly */
       }
 
@@ -46,9 +47,33 @@
       .active {
          font-weight: bold;
       }
+      body {
+        background-color: #f0f8ff; /* Sets the background color of the entire page */
+    }
    </style>
 </head>
 <body class="admin-page">
+      <!-- Navbar Start -->
+      <header>
+         <div class="options">
+             <a href="#" class="logo">
+                 <img src="../images/alvohive_logo.png" alt="AlvoHive Logo">
+                 <span>AlvoHive</span>
+             </a>
+             <ul class="navbar">
+                 <li><a href="#" class="active">Home</a></li>
+                 <li><a href="tools_used.html">About</a></li>
+             </ul>
+             <!-- Icons -->
+             <input type="checkbox" id="menu">
+             <label for="menu"><i id="menu-icon" class='bx bx-menu' style='color:#20586d'></i></label>
+             <nav class="nav">
+                 <ul>
+                     <li><a href="login.html">Sign up / Log in</a></li>
+                 </ul>
+             </nav>
+         </div>
+     </header>
    <div class="container">
       <div class="sidebar-container">
          <div class="greeting-box">
@@ -59,8 +84,8 @@
             <div class="sidebar-links">
                <br><br><a href="#docker" class="nav-link"><i class="fab fa-docker"></i>Docker</a><br><br>
                <a href="#contactSection" class="nav-link"><i class="fas fa-address-book"></i>Contact</a><br><br>
-               <a href="#companySection" class="nav-link"><i class="fa-solid fa-building"></i>Companies</a><br>
-           </div>
+               <a href="#companySection" class="nav-link"><i class="fa-solid fa-building"></i>Companies</a><br><br>
+            </div>
          </div>
       </div>
       <div class="main-content">
@@ -83,58 +108,59 @@
          </div>
       </div>
    </div>
+   <div class="blue-box"></div>
    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-       const sections = {
-          'docker': document.getElementById('docker'),
-          'contactSection': document.getElementById('contactSection'),
-          'companySection': document.getElementById('companySection')
-       };
+      document.addEventListener('DOMContentLoaded', function() {
+         const sections = {
+            'docker': document.getElementById('docker'),
+            'contactSection': document.getElementById('contactSection'),
+            'companySection': document.getElementById('companySection')
+         };
 
-       const navLinks = document.querySelectorAll('.nav-link');
+         const navLinks = document.querySelectorAll('.nav-link');
 
-       function showSection(sectionId) {
-          // Hide all sections
-          Object.values(sections).forEach(section => {
-             section.classList.add('hidden');
-          });
+         function showSection(sectionId) {
+            // Hide all sections
+            Object.values(sections).forEach(section => {
+               section.classList.add('hidden');
+            });
 
-          // Show the selected section
-          const selectedSection = sections[sectionId];
-          if (selectedSection) {
-             selectedSection.classList.remove('hidden');
-          }
-       }
+            // Show the selected section
+            const selectedSection = sections[sectionId];
+            if (selectedSection) {
+               selectedSection.classList.remove('hidden');
+            }
+         }
 
-       // Initial state from URL hash
-       const initialHash = window.location.hash.substr(1);
-       if (initialHash) {
-          showSection(initialHash);
-          // Set active class on initial link
-          const initialLink = document.querySelector(`.nav-link[href="#${initialHash}"]`);
-          if (initialLink) {
-             initialLink.classList.add('active');
-          }
-       }
+         // Initial state from URL hash
+         const initialHash = window.location.hash.substr(1);
+         if (initialHash) {
+            showSection(initialHash);
+            // Set active class on initial link
+            const initialLink = document.querySelector(`.nav-link[href="#${initialHash}"]`);
+            if (initialLink) {
+               initialLink.classList.add('active');
+            }
+         }
 
-       // Event listener for sidebar navigation clicks
-       navLinks.forEach(link => {
-          link.addEventListener('click', function(e) {
-             e.preventDefault();
-             const targetId = e.target.getAttribute('href').substring(1);
-             showSection(targetId);
+         // Event listener for sidebar navigation clicks
+         navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+               e.preventDefault();
+               const targetId = e.target.getAttribute('href').substring(1);
+               showSection(targetId);
 
-             // Update active class on clicked link
-             navLinks.forEach(link => {
-                link.classList.remove('active');
-             });
-             this.classList.add('active');
+               // Update active class on clicked link
+               navLinks.forEach(link => {
+                  link.classList.remove('active');
+               });
+               this.classList.add('active');
 
-             // Update URL hash without scrolling
-             history.replaceState(null, null, `#${targetId}`);
-          });
-       });
-    });
-    </script>
+               // Update URL hash without scrolling
+               history.replaceState(null, null, `#${targetId}`);
+            });
+         });
+      });
+   </script>
 </body>
 </html>
