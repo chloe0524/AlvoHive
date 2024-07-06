@@ -1,4 +1,4 @@
-## Docker: Apache and Postgres installation
+# Docker: Apache and Postgres installation
 
 Base image used: ubuntu/apache2:latest (https://hub.docker.com/r/ubuntu/apache2)\
 Additional packages added:
@@ -15,7 +15,7 @@ Additional packages added:
 
 Project home directory: `$HOME/AlvoHive`
 
-### Adding storage persistance
+## Adding storage persistance
 Creation of local directories:
 ```bash
 $ mkdir $HOME/AlvoHive/apache2
@@ -27,7 +27,7 @@ All are mapped as a volume in docker-compose.yml.
 - $HOME/AlvoHive/web : AlvoHive web.
 - $HOME/AlvoHive/pgdata : PostgreSQL data
 
-### Creating docker build files and docker-compose.yml
+## Creating docker build files and docker-compose.yml
 
 Docker Postgresql image creation will be added later.
 
@@ -38,9 +38,9 @@ $ vi docker/images/apache/dockerfile-apache
 ```
 Add into docker/images/apache/dockerfile-apache:
 ```docker
-FROM ubuntu/apache2:latest
+FROM ubuntu/apache2:2.4-22.04_beta
 RUN apt-get update
-RUN apt-get install -y python3 python3-requests pip iproute2 net-tools inetutils-ping openssh-client postgresql-client vim curl
+RUN apt-get install -y python3 python3-requests python3-psycopg2 python3-flask python3-sqlalchemy python3-flask-sqlalchemy python3-flask-cors libapache2-mod-wsgi-py3 pip iproute2 net-tools inetutils-ping openssh-client postgresql-client libaprutil1-dbd-pgsql vim curl
 # Enable Apache SSL
 RUN set -eux; \
     apt-get update; \
@@ -50,7 +50,7 @@ RUN set -eux; \
 EXPOSE 80
 EXPOSE 443
 ```
-More Python packages will be added later to the image
+More Python packages might be added later to the image
 
 ```bash
 $ vi docker-compose.yml
@@ -73,10 +73,12 @@ services:
       - '443:443'
     volumes:
       - "$HOME/AlvoHive/web:/var/www/html"
-    #- "$HOME/AlvoHive/apache2/apache2.conf:/etc/apache2/apache2.conf"
+	  #- "$HOME/AlvoHive/apache2/apache2.conf:/etc/apache2/apache2.conf"
+	  #- "$HOME/AlvoHive/apache2/000-default.conf:/etc/apache2/sites-enabled/000-default.conf"
     networks:
       - postgres
-      - cverest
+	  - cverest
+	  - host
 
   postgres:
     image: ubuntu/postgres:14-22.04_beta
@@ -102,7 +104,7 @@ networks:
     external: true
 ```
 
-### Docker images creation and container start up
+## Docker images creation and container start up
 ```bash
 $ cd ~/AlvoHive/docker-compose
 $ docker compose up
@@ -132,23 +134,29 @@ NETWORK ID     NAME                         DRIVER    SCOPE
 aa4b66e26820   none                         null      local
 ```
 
-### Apache: configuration files
+## Apache: configuration files
 
 To be done when Apache container is up.
 ```bash
 $ docker container cp apache-AlvoHive:/etc/apache2/apache2.conf $HOME/AlvoHive/apache2
 Successfully copied 255kB to /home/chloe/AlvoHive
 ```
+Using `cp -L` because /etc/apache2/sites-enabled/000-default.conf is a symbolic link
+```bash
+$ docker container cp -L apache-AlvoHive:/etc/apache2/sites-enabled/000-default.conf $HOME/AlvoHive/apache2/000-default.conf
+```
 
 Apache default configuration file is now in `$HOME/AlvoHive/apache2`.
 Remove comments and empty lines for readability:
 ```bash
     $ sed -i '/^#/d;/^$/d' $HOME/AlvoHive/apache2/apache2.conf
+    $ sed -i '/^#/d;/^$/d' $HOME/AlvoHive/apache2/000-default.conf
 ```
 
 In docker-compose.yml, comment out volume mapping:
 ```yaml
-      - "$HOME/AlvoHive/apache2/apache2.conf:/etc/apache2/apache2.conf"
+    - "$HOME/AlvoHive/apache2/apache2.conf:/etc/apache2/apache2.conf"
+	- "$HOME/AlvoHive/apache2/000-default.conf /etc/apache2/sites-enabled/000-default.conf"
 ```
 
 Remove and recreate Suppression Apache container: **stop and start, or restart is not enough.**
@@ -163,11 +171,11 @@ The container apache-AlvoHive now uses `$HOME/AlvoHive/apache2/apache2.conf` as 
 For restarting Apache from the container:
 ```bash
 $ docker exec -it apache-AlvoHive bash
-root@apache:/# /etc/init.d/apache2 reload
+root@apache: /etc/init.d/apache2 reload
 ```
 
 
-### Postgres configuration
+## Postgres configuration
 Directory /home/chloe/AlvoHive/pgdata belongs by default to UID 999 an user root.
 
 ```bash
@@ -185,7 +193,7 @@ $ docker compose restart postgres
 ```
 
 
-### Stopping containers
+## Stopping containers
 Warning: will hang if there is any active `docker exec -it xxxxx bash`.
 ```bash
 $ cd ~/AlvoHive/docker-compose
@@ -195,7 +203,7 @@ $ docker compose stop
 To stop only one container: `docker compose stop service_name`\
 service_name: apache or postgres
 
-### Connecting into the containers
+## Connecting into the containers
 
 ```bash
 ~/AlvoHive/docker-compose$ docker exec -it apache-AlvoHive bash
@@ -205,11 +213,10 @@ root@apache:/#
 ~/AlvoHive/docker-compose$ docker exec -it postgres-AlvoHive bash
 root@postgres:/#
 ```
-
-### Data migration with SSH
+## Data migration with SSH
 
 ```bash
-$ ssh kali@IP_ADDRESS 'PGPASSWORD="jhu97O5W2IMI9XzpNKD/J50szUSmuh/WAaXB7/Cuad0=" pg_dump -U msf -h IP_ADDRESS --table services --table hosts | PGPASSWORD=alvo psql -U alvo -p 5432 -h postgres -d alvo_db'
+$ ssh kali@IP_ADDRESS 'PGPASSWORD="pass_msf_xxxx" pg_dump -U msf -h IP_ADDRESS --table services --table hosts | PGPASSWORD=pwd psql -U username -p 5432 -h postgres -d db_name'
 ```
 
 This command will:
@@ -222,20 +229,20 @@ This command will:
    - Use `psql` to import the data into the `alvo_db` database.
 
 ### Explanation of components:
-- `PGPASSWORD="jhu97O5W2IMI9XzpNKD/J50szUSmuh/WAaXB7/Cuad0="`: Passes the password in a variable to avoid manual input.
+- `PGPASSWORD="pass_msf_xxxx"`: Passes the password in a variable to avoid manual input.
 - `pg_dump`: Postgres tool for exporting data.
 - `-U msf`: Postgres username.
 - `-h `IP_ADDRESS`: Host address.
 - `--table services --table hosts`: List of tables to dump.
 - `|`: Standard pipe to pass output to another command.
-- `PGPASSWORD=alvo`: Passes the password for the database.
+- `PGPASSWORD=pwd`: Passes the password for the database.
 - `psql`: Standard Postgres command-line tool.
-- `-U alvo`: Postgres username.
+- `-U username`: Postgres username.
 - `-p 5432`: Port (default is 5432, so this is optional).
 - `-h postgres`: Hostname (Docker resolves this to the correct container).
-- `-d alvo_db`: database name.
+- `-d db_name`: database name.
 
-### Cleaning all up
+## Cleaning all up
 
 IE: useful when changing the custom image created.
 
@@ -264,7 +271,7 @@ Checking that the image is deleted
 CONTAINER        REPOSITORY        TAG              IMAGE ID          SIZE
 ```
 
-### Accessing the container
+## Accessing the container
 
 ```bash
 ~/AlvoHive/docker-compose$ docker exec -it apache-AlvoHive bash
@@ -276,19 +283,19 @@ root@postgres:/#
 ```
 
 
-### Backup/restore
+## Backup/restore
 
 **Important**: 
 - Using `tar` allows to keep the existing owner/group and rights.
-- Needs to executed as root because `~/AlvoHive/pgdata` is not owned by WSL user.
+- Needs to be executed as root because `~/AlvoHive/pgdata` is not owned by WSL user.
 
-#### Backup
+### Backup
 ```bash
 $ sudo -i tar -cvzf $HOME/Backup_AlvoHive_$(date +%Y-%m-%d_%H-%M).tgz -C $HOME AlvoHive CVE-Search-Docker/docker-compose.yml
 ```
 &rArr; Copy the backup file to a secure remote location.
 
-#### Restore
+### Restore
 
 Untar in a temporary directory and restore the relevant files:
 ```bash
@@ -298,14 +305,14 @@ $ cd restauration
 $ sudo tar xvfz <chemin accès>/Backup_AlvoHive_YYYY-MM-DD_HH_MI.tgz
 ```
 
-### Connection tests
+## Connection tests
 
-#### Testing Apache index.html with a browser
+### Testing Apache index.html with a browser
 
 Ignore the security alert: the certificate used is not sign by a known authority.\
 https://localhost or https://localhost:443, 443 is the default https port.
 
-#### Testing CVE-Search REST API in Python from Apache container
+### Testing CVE-Search REST API in Python from Apache container
 ```bash
 $> docker exec -it apache-AlvoHive bash
 $> vi /tmp/t.py
@@ -330,16 +337,16 @@ Test:
 docker exec -it apache-AlvoHive python3 /tmp/t.py
 ```
 
-#### Testing Postgres DB connection from Apache
+### Testing Postgres DB connection from Apache
 ```bash
 $> docker exec -it apache-AlvoHive psql -U alvo -p 5432 -h postgres -d alvo_db
 ```
 
-#### Testing Postgres DB connection from HeidiSQL on Windows
+### Testing Postgres DB connection from HeidiSQL on Windows
 
 Download : https://www.heidisql.com/download.php
 
-Créer une nouvelle connexion :
+Create a new connection:
 - Network type: **PostgreSQL (TCP/IP)**
 - Library: **libpq-15.dll** (default)
 - IP: **127.0.0.1**

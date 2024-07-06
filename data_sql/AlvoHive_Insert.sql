@@ -232,7 +232,7 @@ VALUES
     (1,1),	/* John Doe ==> host #1, car John Doe pourrait être associé à plusieurs hosts */
     (1,2),
     (1,3),
-	(12,4),  /* Contact id 12 associé à host id 5 */
+	(12,4),  /* Contact id 12 associé à host id 4 */
 	(33,5),
 	(7,6),
 	(11,7);

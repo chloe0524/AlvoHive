@@ -6,6 +6,9 @@ import psycopg2
 from psycopg2 import Error
 import mdutils
 import requests
+import os
+
+host_id=2
 
 # Database parameters
 db_params = {
@@ -21,7 +24,7 @@ def execute_query_and_write_to_md(query, headers, mdFile):
     try:
         connection = psycopg2.connect(**db_params)
         cursor = connection.cursor()
-        cursor.execute(query)
+        cursor.execute(query,(host_id))
         rows = cursor.fetchall()
         data = []
         for row in rows:
@@ -43,7 +46,7 @@ def fetch_cpe_and_query_api(mdFile):
     try:
         connection = psycopg2.connect(**db_params)
         cursor = connection.cursor()
-        cursor.execute("SELECT cpe FROM service_version WHERE id_hosts=4")
+        cursor.execute("SELECT cpe FROM service_version WHERE id_hosts="+str(host_id))
         cpes = cursor.fetchall()
         
         for cpe_row in cpes:
@@ -83,38 +86,28 @@ def fetch_cpe_and_query_api(mdFile):
     
     return details
 
+
+# Main begins
+
+
+
 mdFile = mdutils.MdUtils(file_name='report', title='')
 
 # Query for company and contact information
-query1 = """
-    SELECT company_name, first_name, last_name
-    FROM company, contact
-    WHERE contact.last_name = 'Doe'
-"""
+query1 = "SELECT company_name, first_name, last_name FROM report WHERE id="+str(host_id)
+
 headers1 = ["Company Name", "First Name", "Last Name"]
 execute_query_and_write_to_md(query1, headers1, mdFile)
 
 # Query for host and service version information
-query2 = """
-    SELECT name, os_name, os_sp
-    FROM hosts, service_version
-    WHERE id=id_hosts AND id_hosts=4
-    LIMIT 1
-"""
+query2 = "SELECT name, os_name, os_sp FROM hosts WHERE hosts.id="+str(host_id)
+    
 headers2 = ["Name", "OS Name", "OS SP"]
 execute_query_and_write_to_md(query2, headers2, mdFile)
 
 # Fetch CVE data and process it
 details_section = fetch_cpe_and_query_api(mdFile)
 
-# Now, query for CPE information after processing CVE data
-query3 = """
-    SELECT cpe
-    FROM service_version
-    WHERE id_hosts=4
-"""
-headers3 = ["CPE"]
-execute_query_and_write_to_md(query3, headers3, mdFile)
 
 # Finalize markdown file
 mdFile.create_md_file()
@@ -124,6 +117,9 @@ with open('report.md', 'a') as md_file:
     md_file.write("\n".join(details_section))
 
 # Convert markdown to PDF and run additional scripts
-subprocess.run(['pandoc', 'report.md', '-o', 'report.pdf', '--template=template.tex', '--pdf-engine=lualatex'])
+subprocess.run(['pandoc', 'reports/report.md', '-o', 'reports/report.pdf', '--template=template.tex', '--pdf-engine=lualatex'])
 subprocess.run(['./bar_chart.py'])
 subprocess.run(['./pie_graphic.py'])
+
+if __name__ == "__main__":
+    host_id=5

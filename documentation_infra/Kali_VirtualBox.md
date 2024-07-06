@@ -48,7 +48,7 @@ $ sudo /etc/init.d/postgresql restart
 
 Metasploit uses the Postgres user **msf**.
 
-Identify the password for the user msf (your password will likely be different):
+Identify the password for the user msf (your password is going to be different):
 ```bash
 $ sudo grep -i pa /usr/share/metasploit-framework/config/database.yml
   password: jxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=

@@ -19,9 +19,9 @@ body {
     background-repeat: no-repeat;
     margin: 0;
     padding-top: 100px;
-    padding-bottom: 70px;
     color: var(--text-color);
 }
+
 
 footer {
     position: fixed;
@@ -79,25 +79,44 @@ header {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #1a2858; /* Set text color */
-    font-size: 1.5rem; /* Adjust font size */
+    color: #004AAD;
+    font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
+    margin-right: -40px;
 }
 
 .logo img {
-    width: 90px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
+    width: 90px; 
+    height: auto;
+    margin-bottom: 15px;
+    margin-left: -20px;
+}
+
+.side-index-image {
+    position: absolute;
+    top: 0; /* Adjust as needed based on your layout */
+    left: 0;
+    height: 1710px; /* Span full viewport height */
+    width: 350px; /* Adjust width as needed */
+    object-fit: cover; /* Ensures the image covers the entire container */
+    z-index: -1; /* Ensure it is behind other content */
 }
 
 .logo span {
-    color: var(--main-color);
-    font-size: inherit; /* Inherit font size from parent (.logo) */
+    color: #004AAD;
+    font-size: inherit;
+    margin-left: -10px;
 }
+
 .navbar {
     display: flex;
     column-gap: 0.5rem;
 }
+
+  .navbar li {
+    position: relative;
+  }
 
 .navbar a {
     padding: 8px 17px;
@@ -146,8 +165,8 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 1515px;
+    height: 800px;
     background: url('images/back_image_ground.jpg') no-repeat center center/cover;
     filter: blur(10px);
     z-index: -1;
@@ -158,7 +177,7 @@ header {
     width: 100%;
     min-height: 640px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     gap: 2rem;
     z-index: 1;
@@ -166,16 +185,24 @@ header {
 
 .home .home-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Change this from space-between to flex-end */
     align-items: center;
+    width: 100%; /* Ensure it takes full width */
 }
 
 .home .home-image {
-    flex: 1 1 17rem;
+    flex: 0 0 auto; /* Don't allow it to grow or shrink */
+    width: 50%; /* Adjust this value as needed */
+    text-align: right; /* Align the image to the right */
+    margin-left: 200px;
 }
 
 .home .home-text {
-    flex: 1 1 17rem;
+    flex: 0 0 auto; /* Don't allow it to grow or shrink */
+    width: 40%; /* Adjust this value as needed */
+    padding-right: 5%; /* Add some padding on the right */
+    margin-top: -90px;
+    margin-left: -200px;
 }
 
 .home .home-text h1 {
@@ -197,6 +224,8 @@ header {
     background: var(--bg-color);
     width: 70.5%;
     box-sizing: border-box;
+    font-size: large;
+    margin-top: -50px;
 }
 
 .social-bar {
@@ -247,7 +276,7 @@ header {
     display: flex;
     flex-direction: column;
     background-color: var(--bg-color);
-    border: 2px solid var(--main-color);
+    border: 2px solid #0f2e57;
     border-radius: 10px;
     padding: 60px 40px 40px 40px; /* Adjusted padding to increase height */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -256,7 +285,12 @@ header {
     z-index: 1;
 }
 
-
+.large-image {
+    width: 800px; /* Adjust width as needed */
+    height: auto; /* Automatically adjust height */
+    margin-left: -90px;
+    margin-top: -180px;
+}
 
 .login-tabs {
     display: flex;
@@ -376,12 +410,16 @@ input {
 }
 
 .heading h2 {
-    font-size: 1.7rem;
+    font-size: 2.5rem;
+}
+
+.heading h3 {
+    font-size: 2rem;
 }
 
 .heading p {
-    font-size: 0.938rem;
-    font-weight: 300;
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
 .services-container {
@@ -399,6 +437,7 @@ input {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin-top: 15px;
     padding: 2.5rem 2rem;
     border-radius: 15px;
     box-shadow: 0 0 10px rgb(15 54 55 / 10%);
@@ -525,18 +564,11 @@ input {
     align-items: flex-end; /* Aligns content to the right */
 }
 
-.text-boxes {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* This will align items to the right */
-    margin-top: 40px; /* Space below the navbar */
-    padding-right: 15%; /* Adjust this value to control how far right the boxes go */
-}
-
 .text-box {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     padding: 15px;
-    border: 4px solid #00008B;
+    border: 4px solid;
+    border-color: #004AAD;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     max-width: 70%;
@@ -545,7 +577,7 @@ input {
 
 .text {
     font-size: 1.2em;
-    color: #00008B;
+    color: #004AAD;
     margin: 0;
 }
 
@@ -557,7 +589,7 @@ input {
     justify-content: center;
     align-items: center;
     max-width: 70%;
-    border: 4px solid #00008B;
+    border: 4px solid #004AAD;
     width: 250px; 
     height: 100%;
 }
@@ -579,20 +611,118 @@ input {
     top: 0;
     left: 0;
     width: 350px;
-    height: auto; /* Allow the container to adjust to the image height */
+    height: 800px;
     z-index: -1;
-    overflow: visible; /* Allow the image to extend beyond the container */
+    overflow: visible;
     pointer-events: none;
 }
 
 .background-container img {
     width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Remove any inline spacing */
+    height: auto;
+    display: block; 
 }
 
 .large-logo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: flex-end; /* Align items to the end (right) of the flex container */
+}
+
+.flex-item {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.text-boxes {
+    display: flex;
+    flex-direction: column; /* Display boxes in a single column */
+    align-items: center; /* Center-align items horizontally */
+    margin-top: 40px;
+    padding: 0 20px;
+}
+
+.white-box-section {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    width: 900px;
+    margin-left: 10%; /* Adjust the margin-left percentage to move the boxes to the right */
+    font-size: 1.1em;
+}
+
+.white-box-section h2 {
+    color: #004AAD;
+    font-size: 1.5em;
+    margin-bottom: 14px;
+    text-align: center; /* Center-align the h2 titles */
+}
+
+.white-box-section .sub-section {
+    margin-left: 20px;
+}
+
+.white-box-section h3 {
+    text-align: center; /* Center-align the h3 subtitles */
+}
+
+.h1-title {
+    font-size: 3.5rem !important;
+}
+
+.p-title {
+    font-size: 1.5rem !important;
+    font-weight: bold;
+}
+
+
+.white-box-section p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.image-container img {
+    max-width: 150px;
+    height: auto;
+    border: 4px solid #004AAD;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.popup-menu {
+    position: absolute;
+    top: 140%;
+    left: 0;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1000;
+    display: none;
+    font-size: 0.9rem;
+  }
+
+.popup-menu a {
+    padding: 10px 20px;
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-size: 0.9rem;
+}
+.popup-menu a:hover {
+    background-color: #596fff;
 }

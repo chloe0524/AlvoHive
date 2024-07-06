@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        @keyframes beat {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            height: 60px; /* Adjust height as needed */
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for styling */
+            z-index: 1000;
+        }
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px; /* Adjust maximum width of navbar content */
+            margin: 0 auto; /* Center align content */
+            padding: 0 20px; /* Adjust padding as needed */
+            height: 100%;
+        }
+        .navbar-logo {
+            color: #2b00ff; /* Adjust color as needed */
+            font-size: 24px; /* Adjust font size as needed */
+            font-weight: bold; /* Adjust font weight as needed */
+            text-decoration: none; /* Remove underline if used as a link */
+        }
+        .full-page-image {
+            background-image: url('../static/images/404_bee.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: -3px; /* Start below the navbar */
+            z-index: -1; /* Ensure background is behind content */
+        }
+        .icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #2b00ff;
+            font-size: 24px;
+            z-index: 1000;
+            padding: 30px;
+            margin-left: -500px;
+            margin-top: -250px;
+            width: 50px; /* Adjust the width of the SVG icon */
+            height: 50px;
+            animation: beat 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-content">
+            <a href="../../../index.html" class="navbar-logo"></a>
+            <!-- Add other navbar links or content here if needed -->
+        </div>
+    </div>
+
+    <!-- Content (404 image and icon) -->
+    <a href="../../../index.html">
+            <!-- Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com -->
+            <!-- License - https://fontawesome.com/license/free -->
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="#ff9500" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg>
+    </a>
+    <div class="full-page-image"></div>
+</body>
+</html>

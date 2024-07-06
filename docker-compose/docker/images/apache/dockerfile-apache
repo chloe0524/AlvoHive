@@ -1,11 +1,14 @@
 FROM ubuntu/apache2:latest
 RUN apt-get update
-RUN apt-get install -y python3 python3-requests pip iproute2 net-tools inetutils-ping openssh-client postgresql-client vim curl
+RUN apt-get install -y python3 python3-requests python3-flask python3-flask-sqlalchemy pandoc python3-matplotlib texlive-luatex texlive-latex-base texlive-latex-recommended texlive-pictures texlive-latex-extra pip mdutils iproute2 net-tools inetutils-ping openssh-client postgresql-client libapache2-mod-wsgi-py3 libaprutil1-dbd-pgsql vim curl 
 # Enable Apache SSL
 RUN set -eux; \
-    apt-get update; \
     apt-get install ssl-cert; \
     a2enmod ssl; \
-    a2ensite default-ssl
+    a2ensite default-ssl; \
+    a2enmod dbd; \
+    a2enmod authn_dbd; \
+    a2enmod authn_socache; \
+    a2enmod socache_shmcb;
 EXPOSE 80
 EXPOSE 443

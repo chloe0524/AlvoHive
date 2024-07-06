@@ -14,6 +14,7 @@ services:
     volumes:
       - "$HOME/AlvoHive/web:/var/www/html"
       - "$HOME/AlvoHive/apache2/apache2.conf:/etc/apache2/apache2.conf"
+      - "$HOME/AlvoHive/apache2/000-default.conf:/etc/apache2/sites-available/000-default.conf"
     networks:
       - postgres
       - cverest

@@ -3,7 +3,7 @@
 */
 
 \! echo "-----------------------------------------------------------"
-\! echo "Dropping all the tables"
+\! echo "Dropping all the tables and views"
 \! echo "-----------------------------------------------------------"
 DROP TABLE contact CASCADE;
 DROP TABLE company CASCADE;
@@ -11,6 +11,9 @@ DROP TABLE company_address CASCADE;
 DROP TABLE contact_hosts CASCADE;
 DROP TABLE service_version CASCADE;
 DROP TABLE report CASCADE;
+
+DROP VIEW company_contact;
+
 
 \! echo "-----------------------------------------------------------"
 \! echo "Creating table: contact"
@@ -88,13 +91,21 @@ CREATE TABLE report(
     id_company INTEGER NOT NULL,
     id_contact INTEGER NOT NULL,
     id_hosts BIGINT NOT NULL,
-	report_date TIMESTAMP NOT NULL,
-    markdown VARCHAR(300) NOT NULL,
-    html VARCHAR(300),
-    pdf VARCHAR(300)
+	report_date,
+    report VARCHAR(300), -- Zip file name
+    pdf VARCHAR(300)     -- PDF file name
 );
-ALTER TABLE
-    report ADD PRIMARY KEY(id_report);
+
+
+\! echo "-----------------------------------------------------------"
+\! echo "Creating view: company_contact"
+\! echo "-----------------------------------------------------------"
+CREATE VIEW company_contact AS
+    SELECT c.id_company, c.company_name, f.id_contact, f.first_name, f.last_name, f.email, f.phone, a.city, a.country, c.url, c.logo
+    FROM company c, contact f, company_address a
+    WHERE c.id_company = a.id_company
+        AND f.id_address = a.id_address;
+
 
 \! echo "-----------------------------------------------------------"
 \! echo "Adding Foreign constraints"

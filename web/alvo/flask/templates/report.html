@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Reports</title>
+    <link href="static/gridjs/mermaid.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="static/main.css" />
+  </head>
+
+  <body>
+    <div>
+      <h1>Reports</h1>
+      <br>
+      <hr>
+      <div id="reports"></div>
+    </div>
+    <script src="static/gridjs/gridjs.umd.js"></script>
+    <script>
+      const grid = new gridjs.Grid({
+        columns: [
+          { id: 'id', name: 'Host ID', hidden: true},
+          { id: 'name', name: 'Host Name', formatter: (cell) => gridjs.html(`<b>${cell}</b>`) },
+          { id: 'company_name', name: 'Company' },
+          { id: 'first_name', name: 'First Name' },
+          { id: 'last_name', name: 'Last Name' },
+          /*{ id: 'report_date', name: 'Report Date', formatter: (_,row) => {(row.cells[5].data).toISOString()} },*/
+          { id: 'report_date', name: 'Report Date', formatter: (cell, row, attributes) => dateCell(cell, row, attributes) },
+          { id: 'pdf', name: 'PDF', sort: false, formatter: (cell, row, attributes) => pdfCell(cell, row, attributes) },
+          { id: 'zip', name: 'ZIP', sort: false, formatter: (cell, row, attributes) => zipCell(cell, row, attributes) },
+          { id: 'report', name: 'Report',
+            formatter: (cell, row) => {
+              return gridjs.h('button', {
+                className: 'py-2 mb-4 px-4 border rounded-md text-white bg-blue-600',
+                onClick: () => handleClick(row)
+                }, 'Generate');
+            }
+          }
+        ],
+        data: [
+          {% for report in report %}
+            {
+              id: '{{ report.id }}',
+              company_name: '{{ report.company_name }}',
+              first_name: '{{ report.first_name }}',
+              last_name: '{{ report.last_name }}',
+              name: '{{ report.name }}',
+              report_date: '{{ report.report_date }}',
+              pdf: '{{ report.pdf }}',
+              zip: '{{ report.zip }}'
+            },
+          {% endfor %}
+        ],
+        search: {
+          selector: (cell, rowIndex, cellIndex) => [0, 1, 2, 3].includes(cellIndex) ? cell : null,
+        },
+        sort: true,
+        pagination: true
+      }).render(document.getElementById('reports'));
+
+      function pdfCell(cell, row, att){
+        if (cell!='None')
+        {
+          cell = `<a href="/reports/` + cell + `" target=_blank"><img src="static/pdf.png"></a>`
+        }
+        return gridjs.html(cell);
+      }
+
+      function zipCell(cell, row, att){
+        if (cell!='None')
+        {
+          cell = `<a href="/reports/` + cell + `"><img src="static/zip.png"></a>`
+        }
+        return gridjs.html(cell);
+      }
+
+      function dateCell(cell, row, attributes){
+        if (cell!='None')
+        {
+          timest = Date.parse(cell);
+          datetime = new Date(timest)
+          /*console.log(datetime.toLocaleString())*/
+          cell =`<b>` + datetime.toLocaleString() + `</b>`
+          return gridjs.html(cell);
+        }
+      }
+
+      async function handleClick(row) {
+        await fetch('/report/execute', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ row_value: row._cells[0].data })
+          })
+          grid.updateConfig({}).forceRender();
+          alert ('Report generation finished.')
+      }
+    </script>
+  </body>
+</html>

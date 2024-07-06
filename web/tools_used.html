@@ -11,15 +11,16 @@
 </head>
 <body>
     <header>
-        <div class="options">
-            <a href="#" class="logo">
-                <span>AlvoHive</span>
-            </a>            
-            <ul class="navbar">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+            <div class="options">
+                <a href="#" class="logo">
+                    <img src="images/alvohive_logo.png" alt="AlvoHive Logo" class="logo-img">
+                    <span>AlvoHive</span>
+                </a>            
+                <ul class="navbar">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#">Log In</a></li>
+                    <li><a href="tools_used.html">About</a></li>
+                </ul>
             <input type="checkbox" name="" id="menu">
             <label for="menu"><i id="menu-icon" class='bx bx-menu' style='color:#20586d'></i></label>
             <nav class="nav">
@@ -35,41 +36,59 @@
     </section>
 
     <section class="text-boxes">
-        <div class="text-box">
-            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies se</p>
-        </div>
-        <br>
-        <br>
-        <div class="text-box">
-            <p class="text">Cras elementum ultrices diam. MaecenaLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies ses ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie.</p>
-        </div>
-        <br>
-        <br>
-        <div class="text-box">
-            <p class="text">Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies seLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies se</p>
-        </div>
-        <br>
-        <br>
-        <div class="text-box">
-            <p class="text">Ut pharetra augue nec augue. Nam elit agna, endrerit sit amet, tincidunt ac, viverra sed, nulla. Donec porta diam eu massa. Quisque diam lorem.</p>
+        <div class="white-box-section">
+            <h2><strong>~ First of all ~</strong></h2>
+            <p>The complexity of the AlvoHive project lies in its infrastructure using Apache for web hosting, PostgreSQL for the database, and Docker for containerization. Here is an exhaustive list of what was used to create AlvoHive:</p>
+            <br>            
+            <h2>Virtual Machines and Tools</h2>
+            <p><strong>Kali Linux:</strong> Deployed in a virtual machine environment for conducting penetration tests.</p>
+            <p><strong>Target VM:</strong> Vulnerable systems such as Metasploitable 2 are used as target virtual machines.</p>
+            <br>
+            <h2>Penetration Testing Tools</h2>
+            <p><strong>Nmap:</strong> Utilized for conducting comprehensive network scans to discover hosts and services on a computer network.</p>
+            <p><strong>Metasploit:</strong> A powerful tool used for exploitation and vulnerability testing, allowing for the simulation of attacks to find security weaknesses.</p>
+            <br>
+            <h2>Development Stack</h2>
+            <h3>Web Development</h3>
+            <p><strong>HTML:</strong> Used for structuring web content.</p>
+            <p><strong>CSS:</strong> Employed for styling web pages to enhance their visual appeal.</p>
+            <p><strong>JavaScript:</strong> Adds interactive features and functionalities to web pages.</p>
+            <br>
+            <h3>Backend Development</h3>
+            <p><strong>Python:</strong> Utilized for scripting, data analysis, and backend development.</p>
+            <p><strong>Flask:</strong> A web framework used for building REST APIs.</p>
+            <p><strong>SQLAlchemy:</strong> An ORM (Object Relational Mapper) for database management, providing a way to interact with the database using Python objects.</p>
+            <br>
+            <h3>Database</h3>
+            <p><strong>SQLite:</strong> Used for storing penetration test results and other data in a lightweight database.</p>
+            <p><strong>PostgreSQL:</strong> Employed for handling more complex queries and data management needs.</p>
+            <br>
+            <h2>Docker</h2>
+            <p><strong>Docker:</strong> A platform for developing, shipping, and running applications in containers.</p>
+            <p><strong>Docker Compose:</strong> A tool for defining and running multi-container Docker applications, facilitating easy orchestration of services.</p>
+            <br>
+            <h2>APIs</h2>
+            <p><strong>CVE Search API:</strong> Used for fetching CVE (Common Vulnerabilities and Exposures) descriptions and statuses.</p>
+            <p><strong>REST API:</strong> Allows for interfacing with the web application and fetching data.</p>
+            <br>
+            <h2>Additional Tools</h2>
+            <p><strong>Pandoc:</strong> A universal document converter used for converting Markdown files to PDF reports.</p>
+            <p><strong>mdutils:</strong> A Python package for generating and formatting Markdown files.</p>
+            <br>
+            <h2>Risk Mitigation and Testing</h2>
+            <p><strong>Unit Testing:</strong> Using frameworks like PyUnit (Unittest) for testing individual components and modules to ensure code reliability.</p><br>
+            <p><strong>Version Control:</strong> Git and GitHub are employed for versioning and managing the project repository.</p>
+            <br>
+            <p>To see more about the infrastructure carrying this whole project, check out the document detailing:</p>
+            <ul>
+                <li><strong>Creation of directories and Docker build files:</strong> Apache Dockerfile setup with an Ubuntu base image, Apache installation, SSL configuration, and port exposure.</li><br>
+                <li><strong>Configuring docker-compose.yml:</strong> Services for Apache and Postgres, with environment settings, ports, volumes, and network configurations.</li><br>
+                <li><strong>Starting containers:</strong> Commands for starting, running in the background, checking status, and accessing containers.</li><br>
+                <li><strong>Apache and Postgres configurations:</strong> Customizing Apache and Postgres settings, mapping config files, and container restarts.</li><br>
+                <li><strong>Backup and restore processes:</strong> Commands for creating and restoring backups.</li><br>
+                <li><strong>Connection tests:</strong> Methods to test Apache and Postgres connections, including Python scripts and database client setups.</li>
+            </ul>
         </div>
     </section>
-    <footer id="footer"></footer>
-
-    <script>
-        window.addEventListener('load', function() {
-            var backgroundImage = document.querySelector('.background-container img');
-            var footer = document.getElementById('footer');
-            
-            function positionFooter() {
-                var imageHeight = backgroundImage.offsetHeight;
-                footer.style.top = imageHeight + 'px';
-            }
-
-            positionFooter();
-            window.addEventListener('resize', positionFooter);
-        });
-    </script>
 </body>
-<footer id="footer"></footer>
 </html>

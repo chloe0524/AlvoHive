@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Docker Containers</title>
+
+    <link rel="stylesheet" type="text/css" href="static/main.css" />
+</head>
+<body>
+    <h2>Docker Containers</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Processes</th>
+                <th>Image</th>
+                <th>Command</th>
+                <th>Status</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for container in containers %}
+            <tr>
+                <td><button onclick="showPSForContainer('{{ container.Id }}')"><img src="static/dockerx30.png"></button></td>
+                <td>{{ container.Image }}</td>
+                <td>{{ container.Command }}</td>
+                <td>{{ container.Status }}</td>
+                <td>{{ container.Names[0] }}</td>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Container Processes</h2>
+    <div id="processes"></div>
+
+    <script>
+        function showPSForContainer(Id) {
+            var ctr_column=1;
+            var tty_position;
+
+            fetch('/docker_status/processes/' + Id)
+                .then(response => response.json())
+                .then(data => {
+                    let html = '<table><tr>';
+                    // Looping through all column headers
+                    data.Titles.forEach(col_header => {
+                        // Identify TTY and CPU position
+                        switch (col_header) {
+                            case 'TTY': // Column TTY found: skip it
+                                tty_position=ctr_column;
+                                console.log('TTY: tty_position=', tty_position );
+                                break;
+                            case 'C': // Column C found: clarify title
+                                html += '<th>CPU%</th>';
+                                ctr_column++;
+                                break;
+                            case 'TIME': // Column TIME found: clarify title
+                                html += '<th>Total CPU time since started</th>'
+                                ctr_column++;
+                                break;
+                            case 'STIME': // Column STIME found: clarify title
+                                html += '<th>Starting Time</th>'
+                                ctr_column++;
+                                break;
+                            default:
+                                html += '<th>' + col_header + '</th>';
+                                ctr_column++;
+                        }
+                    });
+
+                    html += '</tr>';
+                    // Looping through all column values
+                    data.Processes.forEach(process => {
+                        html += '<tr>';
+                        ctr_column=tty_position;
+                        process.forEach(item => {
+                            if (ctr_column !== 1)
+                            {
+                                html += '<td>' + item + '</td>';
+                            }
+                            else {  // If ctr_column==1 ==> TTY column value to skip
+                                console.log('tty_position=',tty_position,' ctr_column=', ctr_column, ' item value to skip=', item)
+                            }
+                            ctr_column--;                            
+                        });
+                        html += '</tr>';
+                    });
+                    html += '</table>';
+                    document.getElementById('processes').innerHTML = html;
+                });
+        }
+    </script>
+</body>
+</html>

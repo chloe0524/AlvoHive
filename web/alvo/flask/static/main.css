@@ -123,11 +123,11 @@ h1::before {
    font-weight: bold !important;
 }
 
-button, table td button {
+/*button, table td button {
    border: none;
    background: transparent;
    padding: 0;
-}
+}*/
 
 /* Section styles */
 #processes-section {
@@ -337,7 +337,7 @@ tr:nth-of-type(even) {
 .cell-content {
    display: block;
    max-width: 200px; 
-   white-space: nowrap;
+   white-space: normal;
    overflow: hidden;
    text-overflow: ellipsis;
 }
