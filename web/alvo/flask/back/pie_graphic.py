@@ -48,7 +48,9 @@ labels = [category for category in categories if category_counts[category] > 0]
 sizes = [category_counts[category] for category in labels]
 
 # Define colors
-colors = ['#ff6666', '#66b3ff', '#99ff99', '#666666']
+#          Low        Medium      High      Critical
+colors = ['#99ff99', '#66b3ff', '#ffe205', '#ff6666']
+
 
 explode = [0.1 if category == 'Low' else 0 for category in labels]
 

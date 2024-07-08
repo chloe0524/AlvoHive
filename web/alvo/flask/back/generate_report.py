@@ -24,7 +24,7 @@ def execute_query_and_write_to_md(query, headers, mdFile):
         data = []
         for row in rows:
             data.extend(list(row))
-        mdFile.new_table(columns=len(headers), rows=len(data)//len(headers)+1, text=headers+data, text_align='left')
+            mdFile.new_table(columns=len(headers), rows=len(data)//len(headers)+1, text=headers+['**'+item+'**' for item in data], text_align='left')
         cursor.close()
     except (Exception, Error) as error:
         print("Error while connecting to PostgreSQL", error)
@@ -101,6 +101,9 @@ def fetch_cpe_and_query_api(mdFile):
 
 
 def cleanup_md(markdownFile):
+    print("**************************************")
+    print("Cleaning MD report: " + markdownFile)
+    print("**************************************")
     with open(markdownFile, "r") as f:
         lines = f.readlines()
     with open(markdownFile, "w") as f:
@@ -114,7 +117,7 @@ def update_report():
         connection = psycopg2.connect(**db_params)
         cursor = connection.cursor()
         print("**************************************")
-        print("update hosts set pdf='" + report_name + ".pdf', zip='" + report_name + ".zip' where id=" + str(host_id))
+        print("update hosts set report_date='" + str(dt.now()) + "', pdf='" + report_name + ".pdf', zip='" + report_name + ".zip' where id=" + str(host_id))
         print("**************************************")
         try:
             # Updating the table "hosts", not the view "report"
@@ -204,15 +207,12 @@ subprocess.run([base_path + '/pie_graphic.py', report_full_name + '.md'])
 # Convert markdown to PDF and run additional scripts
 subprocess.run(['pandoc', report_full_name + '.md', '-o', report_full_name + '.pdf', '--template=' + base_path + '/template.tex', '--pdf-engine=lualatex'])
 
+# Cleanup Latex tags in Markdown file
+cleanup_md(report_full_name + '.md')
+
 # Create zip file. -j: do not store the path, just the file name
 subprocess.run(['zip', '-j', report_full_name, report_full_name + '.md', report_full_name + '.pdf'])
 
-# Update report view, column pdf with the report name
+# Update report view, column pdf with the report name. Update report_date
 update_report()
 
-# Cleanup Latex tags in Markdown file
-print ("Report name: " + report_full_name)
-
-cleanup_md(report_full_name + '.md')
-
-# Execute : update report(report_date,pf,zip) values (datexxxx, report.pdf, report.zip)

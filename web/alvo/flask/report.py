@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request, jsonify, after_this_request
 from flask_sqlalchemy import SQLAlchemy
 import base64
 import os 
@@ -8,6 +8,10 @@ import subprocess
 
 # Configure Flask application
 report = Flask(__name__)
+
+
+# WSL/Windows: all containers are reachable with hostname "localhost"
+# Inside Apache container: use hostnale "postgres" to connect to the DB
 
 postgres_hostname = "localhost"
 if os.uname()[1] == "apache":
@@ -28,19 +32,19 @@ class Report(db.Model):
     pdf = db.Column(db.String(100))
     zip = db.Column(db.String(100))
 
+
+# Run script generating the report
 @report.route('/execute', methods=['POST'])
 def execute():
     data = request.json
     row_value = data.get('row_value')
     
     base_path = os.path.dirname(__file__)
-    # debug: visible with 'docker logs'
     print ("***************************************************************")
     print ('Execute: ' + base_path + '/back/generate_report.py , host id='+row_value)
     print ("***************************************************************") 
     result = subprocess.run([base_path + '/back/generate_report.py', row_value])
-    
-    return jsonify({'output': result.stdout})
+    return jsonify({'output': result.stdout}), 200
 
 
 @report.route('/')
@@ -68,4 +72,4 @@ def index():
         return f"Error fetching reports: {str(e)}"
 
 if __name__ == '__main__':
-    report.run(debug=True)
+    report.run()

@@ -14,7 +14,7 @@ import psutil
 
 docker_host="localhost"
 if os.uname()[1] == "apache":
-    docker_host="172.23.8.174" # To be found with "ip a show eth0" from wsl
+    docker_host="172.17.246.188" # To be found with "ip a show eth0" from wsl
 
 DOCKER_API_URL = 'http://'+docker_host+':2375' # Docker REST API endpoint
 

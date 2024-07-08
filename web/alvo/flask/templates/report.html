@@ -12,25 +12,52 @@
       <br>
       <hr>
       <div id="reports"></div>
+      <br>
+      <hr>
+      <br>
+      <div id="message">Generating...</div>
+      <br>
     </div>
+    
+    <style>
+      #message{
+        background-color: #02008a;
+        color: white;
+        display: none;
+      }
+    </style>
+
     <script src="static/gridjs/gridjs.umd.js"></script>
     <script>
-      const grid = new gridjs.Grid({
+        const grid = new gridjs.Grid({
+        sort: true,
+        pagination: true,
+        autowidth: true,
         columns: [
           { id: 'id', name: 'Host ID', hidden: true},
+          
+          // Host Name in bold
           { id: 'name', name: 'Host Name', formatter: (cell) => gridjs.html(`<b>${cell}</b>`) },
+          
           { id: 'company_name', name: 'Company' },
           { id: 'first_name', name: 'First Name' },
           { id: 'last_name', name: 'Last Name' },
-          /*{ id: 'report_date', name: 'Report Date', formatter: (_,row) => {(row.cells[5].data).toISOString()} },*/
+          
+          // Format Postgres timestamp data: function dateCell
           { id: 'report_date', name: 'Report Date', formatter: (cell, row, attributes) => dateCell(cell, row, attributes) },
+          
+          // Show pdf icon and open to the pdf report in a new tab: function pdfCell
           { id: 'pdf', name: 'PDF', sort: false, formatter: (cell, row, attributes) => pdfCell(cell, row, attributes) },
+          
+          // Show zip icon and download to the zip file: function zipCell
           { id: 'zip', name: 'ZIP', sort: false, formatter: (cell, row, attributes) => zipCell(cell, row, attributes) },
+
+          // Display a button that triggers function runReport when clicked
           { id: 'report', name: 'Report',
             formatter: (cell, row) => {
               return gridjs.h('button', {
                 className: 'py-2 mb-4 px-4 border rounded-md text-white bg-blue-600',
-                onClick: () => handleClick(row)
+                onClick: () => { runReport(row); }
                 }, 'Generate');
             }
           }
@@ -51,39 +78,46 @@
         ],
         search: {
           selector: (cell, rowIndex, cellIndex) => [0, 1, 2, 3].includes(cellIndex) ? cell : null,
-        },
-        sort: true,
-        pagination: true
+        }       
       }).render(document.getElementById('reports'));
 
+      // Format pdf cell
       function pdfCell(cell, row, att){
-        if (cell!='None')
+        if (cell!='None')   // If != None => a report was already generated
         {
+          // Shows pdf icon and provides a link to open the pdf report in a new tab
           cell = `<a href="/reports/` + cell + `" target=_blank"><img src="static/pdf.png"></a>`
         }
         return gridjs.html(cell);
       }
 
+      // Format zip cell
       function zipCell(cell, row, att){
-        if (cell!='None')
+        if (cell!='None')   // If != None => a report was already generated
         {
+          // Shows zip icon and provides a link to download the zip
           cell = `<a href="/reports/` + cell + `"><img src="static/zip.png"></a>`
         }
         return gridjs.html(cell);
       }
 
+      // Format creation date cell      
       function dateCell(cell, row, attributes){
-        if (cell!='None')
+        if (cell!='None')   // If != None => a report was already generated
         {
+          // Shows the rport creation date in shorter format (ex: 04/07/2024 19:52:59)
           timest = Date.parse(cell);
           datetime = new Date(timest)
-          /*console.log(datetime.toLocaleString())*/
-          cell =`<b>` + datetime.toLocaleString() + `</b>`
+          cell = datetime.toLocaleString()
           return gridjs.html(cell);
         }
       }
 
-      async function handleClick(row) {
+      // Runs the report for the current host
+      // Synchronously : function defined as asynch and await keyword used
+      async function runReport(row) {
+        var progress = document.getElementById("message");
+        progress.style.display = "block";
         await fetch('/report/execute', {
             method: 'POST',
             headers: {
@@ -91,8 +125,9 @@
             },
             body: JSON.stringify({ row_value: row._cells[0].data })
           })
-          grid.updateConfig({}).forceRender();
-          alert ('Report generation finished.')
+        progress.style.display = "none";
+        await alert ('Report generation finished.')
+        location.reload()
       }
     </script>
   </body>

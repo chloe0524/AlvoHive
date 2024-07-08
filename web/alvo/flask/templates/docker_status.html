@@ -2,16 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Docker Containers</title>
-
     <link rel="stylesheet" type="text/css" href="static/main.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Base styles */
+        body {
+            background: white;
+            font-family: 'Roboto', sans-serif; /* Default font */
+        }
+
+        img.alvo-logo {
+            border: none;
+            box-shadow: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: inherit;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+
+        th {
+            background-color: darkblue;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-of-type(even) td {
+            background: #fff;
+        }
+
+        tr:nth-of-type(odd) td {
+            background: rgb(245, 251, 253);
+        }
+
+        /* Specific styles */
+        .gridjs-th {
+            background-color: darkblue !important;
+            color: white !important;
+            font-weight: bold !important;
+        }
+
+        button, table td button {
+            border: none;
+            background: transparent;
+            padding: 0;
+        }
+
+        /* Section styles */
+        #processes-section {
+            margin-top: 20px;
+        }
+
+        #container-top table {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Docker Containers</h1>
+    <h1>Docker Containers</h1>
+    <br>
+    <hr>
+    <br>
     <table>
         <thead>
             <tr>
-                <th>Processes</th>
+                <th>Top</th>
                 <th>Image</th>
                 <th>Command</th>
                 <th>Status</th>
@@ -21,74 +85,43 @@
         <tbody>
             {% for container in containers %}
             <tr>
-                <td><button onclick="showPSForContainer('{{ container.Id }}')"><img src="static/dockerx30.png"></button></td>
+                <td><button onclick="showTop('{{ container.Id }}')"><img src="static/images/alvo_logo.png" class="alvo-logo"></button></td>
                 <td>{{ container.Image }}</td>
                 <td>{{ container.Command }}</td>
                 <td>{{ container.Status }}</td>
                 <td>{{ container.Names[0] }}</td>
-                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h2>Container Processes</h2>
-    <div id="processes"></div>
+    <div id="processes-section" style="display: none;">
+        <h2>Container Processes</h2>
+        <div id="container-top"></div>
+    </div>
 
     <script>
-        function showPSForContainer(Id) {
-            var ctr_column=1;
-            var tty_position;
-
-            fetch('/docker_status/processes/' + Id)
+        function showTop(containerId) {
+            // Show the processes section
+            document.getElementById('processes-section').style.display = 'block';
+    
+            fetch('/top/' + containerId)
                 .then(response => response.json())
                 .then(data => {
-                    let html = '<table><tr>';
-                    // Looping through all column headers
-                    data.Titles.forEach(col_header => {
-                        // Identify TTY and CPU position
-                        switch (col_header) {
-                            case 'TTY': // Column TTY found: skip it
-                                tty_position=ctr_column;
-                                console.log('TTY: tty_position=', tty_position );
-                                break;
-                            case 'C': // Column C found: clarify title
-                                html += '<th>CPU%</th>';
-                                ctr_column++;
-                                break;
-                            case 'TIME': // Column TIME found: clarify title
-                                html += '<th>Total CPU time since started</th>'
-                                ctr_column++;
-                                break;
-                            case 'STIME': // Column STIME found: clarify title
-                                html += '<th>Starting Time</th>'
-                                ctr_column++;
-                                break;
-                            default:
-                                html += '<th>' + col_header + '</th>';
-                                ctr_column++;
-                        }
+                    let topHtml = '<table><thead><tr>';
+                    data.Titles.forEach(title => {
+                        topHtml += '<th>' + title + '</th>';
                     });
-
-                    html += '</tr>';
-                    // Looping through all column values
+                    topHtml += '</tr></thead><tbody>';
                     data.Processes.forEach(process => {
-                        html += '<tr>';
-                        ctr_column=tty_position;
+                        topHtml += '<tr>';
                         process.forEach(item => {
-                            if (ctr_column !== 1)
-                            {
-                                html += '<td>' + item + '</td>';
-                            }
-                            else {  // If ctr_column==1 ==> TTY column value to skip
-                                console.log('tty_position=',tty_position,' ctr_column=', ctr_column, ' item value to skip=', item)
-                            }
-                            ctr_column--;                            
+                            topHtml += '<td>' + item + '</td>';
                         });
-                        html += '</tr>';
+                        topHtml += '</tr>';
                     });
-                    html += '</table>';
-                    document.getElementById('processes').innerHTML = html;
+                    topHtml += '</tbody></table>';
+                    document.getElementById('container-top').innerHTML = topHtml;
                 });
         }
     </script>
