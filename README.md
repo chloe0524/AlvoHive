@@ -48,7 +48,8 @@
 
 ### Timeline
 
--
+![timeline_alvohive](https://github.com/chloe0524/AlvoHive/assets/127857895/c2e7f190-e1a8-4c8b-b263-0ac77d630efe)
+
 
 ### Architecture
 ![Alvo_archi_slides drawio](https://github.com/chloe0524/AlvoHive/assets/127857895/ec9952c4-6dca-4cb6-a3da-420c81fcc8ac)
