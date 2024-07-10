@@ -1,19 +1,31 @@
-# Docker: Apache and Postgres installation
 
-Base image used: ubuntu/apache2:latest (https://hub.docker.com/r/ubuntu/apache2)\
-Additional packages added:
-* python3
-* python3-requests
-* pip
-* iproute2
-* net-tools
-* inetutils-ping
-* openssh-client
-* postgresql-client
-* vim
-* curl
+# Docker: Apache and Postgres installation <!-- omit in toc -->
+
+Base image used: 
+* Apache: ubuntu/apache2:latest
+* Postgres: ubuntu/postgres:14-22.04_beta
 
 Project home directory: `$HOME/AlvoHive`
+
+- [Adding storage persistance](#adding-storage-persistance)
+- [Creating docker build files and docker-compose.yml](#creating-docker-build-files-and-docker-composeyml)
+- [Docker images creation and container start up](#docker-images-creation-and-container-start-up)
+- [Apache configuration](#apache-configuration)
+- [Postgres configuration](#postgres-configuration)
+- [Stopping containers](#stopping-containers)
+- [Connecting to the containers: starting a shell](#connecting-to-the-containers-starting-a-shell)
+- [Data migration with SSH](#data-migration-with-ssh)
+  - [Explanation of components:](#explanation-of-components)
+- [Cleaning all up](#cleaning-all-up)
+- [Backup/restore](#backuprestore)
+  - [Backup](#backup)
+  - [Restore](#restore)
+- [Connection tests](#connection-tests)
+  - [Testing Apache index.html with a browser](#testing-apache-indexhtml-with-a-browser)
+  - [Testing CVE-Search REST API in Python from Apache container](#testing-cve-search-rest-api-in-python-from-apache-container)
+  - [Testing Postgres DB connection from Apache](#testing-postgres-db-connection-from-apache)
+  - [Testing Postgres DB connection from HeidiSQL on Windows](#testing-postgres-db-connection-from-heidisql-on-windows)
+
 
 ## Adding storage persistance
 Creation of local directories:
@@ -39,22 +51,29 @@ $ vi docker/images/apache/dockerfile-apache
 Add into docker/images/apache/dockerfile-apache:
 ```docker
 FROM ubuntu/apache2:2.4-22.04_beta
+
 RUN apt-get update
-RUN apt-get install -y python3 python3-requests python3-psycopg2 python3-flask python3-sqlalchemy python3-flask-sqlalchemy python3-flask-cors libapache2-mod-wsgi-py3 pip iproute2 net-tools inetutils-ping openssh-client postgresql-client libaprutil1-dbd-pgsql vim curl
-# Enable Apache SSL
+
+RUN apt-get install -y python3 python3-pip  python3-requests python3-psycopg2 python3-flask python3-sqlalchemy python3-flask-sqlalchemy python3-flask-cors python3-psutil libapache2-mod-wsgi-py3 iproute2 net-tools inetutils-ping openssh-client postgresql-client libaprutil1-dbd-pgsql vim curl pandoc python3-matplotlib texlive-luatex texlive-latex-base texlive-latex-recommended texlive-pictures texlive-latex-extra --fix-missing
+
+# Checked: python3-mdutils package not available
+RUN pip install mdutils --break-system-packages
+
+# Enable SSL, authentication using DB
 RUN set -eux; \
     apt-get update; \
     apt-get install ssl-cert; \
+    a2enmod dbd; \
+    a2enmod authn_dbd; \
+    a2enmod authn_socache; \
+    a2enmod socache_shmcb; \
     a2enmod ssl; \
-    a2ensite default-ssl
+    a2ensite default-ssl; 
+
 EXPOSE 80
 EXPOSE 443
 ```
-More Python packages might be added later to the image
 
-```bash
-$ vi docker-compose.yml
-```
 Add into docker-compose.yml: **mapping of apache2.conf is disabled at this step**.
 ```yaml
 services:
@@ -134,7 +153,7 @@ NETWORK ID     NAME                         DRIVER    SCOPE
 aa4b66e26820   none                         null      local
 ```
 
-## Apache: configuration files
+## Apache configuration
 
 To be done when Apache container is up.
 ```bash
@@ -159,7 +178,7 @@ In docker-compose.yml, comment out volume mapping:
 	- "$HOME/AlvoHive/apache2/000-default.conf /etc/apache2/sites-enabled/000-default.conf"
 ```
 
-Remove and recreate Suppression Apache container: **stop and start, or restart is not enough.**
+Remove and recreate Apache container: **stop and start, or restart is not enough.**
 ```bash
 $ docker compose down apache
 $ docker compose up apache
@@ -168,10 +187,9 @@ $ docker compose up apache
 The container apache-AlvoHive now uses `$HOME/AlvoHive/apache2/apache2.conf` as configuration file.
 
 
-For restarting Apache from the container:
+To restart Apache:
 ```bash
-$ docker exec -it apache-AlvoHive bash
-root@apache: /etc/init.d/apache2 reload
+$ docker exec -it apache-AlvoHive apachectl graceful
 ```
 
 
@@ -203,7 +221,7 @@ $ docker compose stop
 To stop only one container: `docker compose stop service_name`\
 service_name: apache or postgres
 
-## Connecting into the containers
+## Connecting to the containers: starting a shell
 
 ```bash
 ~/AlvoHive/docker-compose$ docker exec -it apache-AlvoHive bash
@@ -213,6 +231,7 @@ root@apache:/#
 ~/AlvoHive/docker-compose$ docker exec -it postgres-AlvoHive bash
 root@postgres:/#
 ```
+
 ## Data migration with SSH
 
 ```bash
@@ -223,8 +242,8 @@ This command will:
 
 1. SSH into the Kali VM at `IP_ADDRESS`.
 2. Set the Postgres password for the msf user using the `PGPASSWORD` environment variable (avoiding manual entry).
-3. Use `pg_dump` to export the `services` and `hosts` tables from the `msf` user database.
-4. `|` -> Pipe the dumped data to another Postgres instance:
+3. Use `pg_dump` to export the `services` and `hosts` tables from the `msf` user database: **generates SQL.**
+4. `|` -> Pipe the dumped data to another Postgres instance: the one used by AlvoHive
    - Set the Postgres password for the `alvo` user.
    - Use `psql` to import the data into the `alvo_db` database.
 
@@ -232,7 +251,7 @@ This command will:
 - `PGPASSWORD="pass_msf_xxxx"`: Passes the password in a variable to avoid manual input.
 - `pg_dump`: Postgres tool for exporting data.
 - `-U msf`: Postgres username.
-- `-h `IP_ADDRESS`: Host address.
+- `-h `IP_ADDRESS`: Postgres host address.
 - `--table services --table hosts`: List of tables to dump.
 - `|`: Standard pipe to pass output to another command.
 - `PGPASSWORD=pwd`: Passes the password for the database.
@@ -270,18 +289,6 @@ Checking that the image is deleted
 ~/AlvoHive/docker-compose$ docker compose images
 CONTAINER        REPOSITORY        TAG              IMAGE ID          SIZE
 ```
-
-## Accessing the container
-
-```bash
-~/AlvoHive/docker-compose$ docker exec -it apache-AlvoHive bash
-root@apache:/#
-```
-```bash
-~/AlvoHive/docker-compose$ docker exec -it postgres-AlvoHive bash
-root@postgres:/#
-```
-
 
 ## Backup/restore
 

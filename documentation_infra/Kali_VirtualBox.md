@@ -1,4 +1,15 @@
-# Kali VM installation and configuration / Postgres configuration
+# Kali VM installation and configuration / Postgres configuration <!-- omit in toc -->
+
+- [VM download and configuration](#vm-download-and-configuration)
+- [SSH activation and start](#ssh-activation-and-start)
+- [Postgres configuration](#postgres-configuration)
+	- [Add Kali IP to the listener:](#add-kali-ip-to-the-listener)
+	- [Allow connections from any IP](#allow-connections-from-any-ip)
+	- [Restart Postgres](#restart-postgres)
+	- [Identify Postgres password](#identify-postgres-password)
+	- [Connect to Postgres](#connect-to-postgres)
+
+
 
 ## VM download and configuration
 Kali VirtualBox VM download: https://www.kali.org/get-kali/#kali-virtual-machines
@@ -8,6 +19,7 @@ Provides a ready-to-use vbox configuration file and vdi disk.
 Changed network configuration from NAT to Host-only adapter.
 
 ## SSH activation and start
+
 Allow to connect through SSH from Windows or WSL.
 
 ```bash
@@ -27,16 +39,18 @@ Active: active (running) since Thu 2024-05-30 08:14:32 EDT; 1h 52min ago
 $ sudo vi /etc/postgresql/16/main/postgresql.conf
 ```
 
-Add line: `listen_addresses = 'localhost,IP_ADDRESS' # what IP address(es) to listen on;`
+Add line: `listen_addresses = 'localhost,IP_ADDRESS' # what IP address(es) to listen on`
 
 Postgres listener now will also "listen" to connections issued to IP_ADDRESS.
 
+
 ### Allow connections from any IP
 
-```bash
+``` bash
 $ sudo vi /etc/postgresql/16/main/pg_hba.conf
 ```
 Add line: `host    all             all             all            scram-sha-256`
+
 
 ### Restart Postgres
 
@@ -48,8 +62,8 @@ $ sudo /etc/init.d/postgresql restart
 
 Metasploit uses the Postgres user **msf**.
 
-Identify the password for the user msf (your password is going to be different):
-```bash
+Identify the password for the user msf:
+``` bash
 $ sudo grep -i pa /usr/share/metasploit-framework/config/database.yml
   password: jxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=
   password: jxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=

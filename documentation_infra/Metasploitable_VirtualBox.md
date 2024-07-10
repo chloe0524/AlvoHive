@@ -1,4 +1,10 @@
-# Metasploitable2 installation
+# Metasploitable2 installation  <!-- omit in toc -->
+
+- [Download](#download)
+- [Installation](#installation)
+- [Set French keyboard layout](#set-french-keyboard-layout)
+- [Configure SSH and access by name on other Kali VM and WSL](#configure-ssh-and-access-by-name-on-other-kali-vm-and-wsl)
+
 
 ## Download
 
