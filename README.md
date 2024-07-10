@@ -1,5 +1,3 @@
-
-
 # :lock: AlvoHive :honey_pot:
 
 #### The goal is to create a tool to extract data gathered during a ``penetration test`` and organize it into a document template. It includes  charts, an executive summary, and a summary of the Common Vulnerabilities and Exposures (``CVEs``) identified.
