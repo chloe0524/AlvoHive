@@ -212,7 +212,8 @@ cleanup_md(report_full_name + '.md')
 
 # Create zip file. -j: do not store the path, just the file name
 subprocess.run(['zip', '-j', report_full_name, report_full_name + '.md', report_full_name + '.pdf'])
-
+print('image:' + base_path + '/alvo_*_chart.png')
+subprocess.run(['rm', '-f', base_path + '/alvo_bar_chart.png', base_path + '/alvo_pie_chart.png' ])
 # Update report view, column pdf with the report name. Update report_date
 update_report()
 
