@@ -1,4 +1,4 @@
-# **:construction: WORK IN PROGRESS :construction:**
+
 
 # :lock: AlvoHive :honey_pot:
 
@@ -48,6 +48,9 @@
 \
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [Docker image installation, configuration and runtime PostgreSQL](documentation_infra/Apache_Postgres_docker.md)
 
+### Timeline
+
+-
 
 ### Architecture
 ![Alvo_archi_slides drawio](https://github.com/chloe0524/AlvoHive/assets/127857895/ec9952c4-6dca-4cb6-a3da-420c81fcc8ac)
