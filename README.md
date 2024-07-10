@@ -50,5 +50,5 @@
 
 
 ### Architecture
-![AlvoHive_archi](https://github.com/chloe0524/AlvoHive/assets/127857895/818aa976-346e-4036-958e-4c86eed8cf39)
+![Alvo_archi_slides drawio](https://github.com/chloe0524/AlvoHive/assets/127857895/ec9952c4-6dca-4cb6-a3da-420c81fcc8ac)
 
