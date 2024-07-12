@@ -14,6 +14,7 @@ db = SQLAlchemy(contact_list)
 
 #    id_company = db.Column(db.Integer, primary_key=True)
 
+# define type of data content
 class Company_contact(db.Model):
     id_company = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.String(100))
@@ -27,6 +28,7 @@ class Company_contact(db.Model):
     url = db.Column(db.String(512))
     logo = db.Column(db.LargeBinary)
 
+# define main route
 @contact_list.route('/')
 def index():
     company_contact = Company_contact.query.all()
