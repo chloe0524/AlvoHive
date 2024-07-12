@@ -15,12 +15,14 @@
     </div>
     <script src="static/gridjs/gridjs.umd.js"></script>
     <script>
+      /*beginning of grid*/
       new gridjs.Grid({
         columns: [
           { id: 'company_name', name: 'Name' , formatter: (cell) => gridjs.html(`<b>${cell}</b>`)},
           { id: 'url', name: 'URL', sort: false, formatter: (cell) => gridjs.html(`<a href="${cell}" target="_new">${cell}</b></a>`)},
           { id: 'logo', name: 'Logo', sort: false, formatter: (_, row) => gridjs.html(`<a href="${row.cells[1].data}" target="_blank"><img src="data:image/png;base64,${row.cells[2].data}" alt="Logo" width="50"/></a>`) }
         ],
+        /*define layout on content in grid*/
         data: [
           {% for company in company %}
             {
