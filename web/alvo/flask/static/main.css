@@ -115,8 +115,6 @@ h1::before {
    filter: blur(6px);
    z-index: -1;
 }
-
-/* Specific styles */
 .gridjs-th {
    background-color: darkblue !important;
    color: white !important;
@@ -147,7 +145,7 @@ h1::before {
 }
 
 .sidebar {
-   width: 220px; /* Same width as greeting-box and blue-box */
+   width: 220px;
    height: auto !important;
    margin-top: 44px;
    background-color: #00008B;
@@ -157,7 +155,7 @@ h1::before {
    padding: 20px 10px; 
    border-radius: 10px;
    margin-right: 20px;
-   margin-left: 10px; /* Add left margin */
+   margin-left: 10px;
    padding-right: 0;
    transition: width 0.3s;
 }
@@ -174,7 +172,7 @@ h1::before {
 }
 
 .collapsed .sidebar {
-   width: 60px; /* Collapsed sidebar width */
+   width: 60px;
 }
 
 .sidebar-brand {
@@ -226,7 +224,7 @@ h1::before {
    color: white;
    text-decoration: none;
    padding: 10px 0;
-   padding-left: 10px; /* Adjust this value as needed to align with "Home" */
+   padding-left: 10px;
    margin: 5px 0;
    transition: background 0.3s;
    position: relative;
@@ -240,7 +238,7 @@ h1::before {
    background-color: white;
    color: #1a478c;
    border-radius: 15px 0 0 15px;
-   padding-left: 10px; /* Ensure this matches the padding-left of .nav-link */
+   padding-left: 10px;
 }
 
 .nav-link, .home-class {
@@ -248,7 +246,7 @@ h1::before {
 }
 
 .home-class::before {
-   content: ''; /* Shape or icon */
+   content: '';
 }
 
 .main-content {
@@ -280,12 +278,12 @@ h1::before {
 }
 
 .white-box h2 {
-   margin-top: 0; /* Reset margin if necessary */
-   /* Check other margins and paddings as needed */
+   margin-top: 0;
+
 }
 
 #container-top {
-   padding-top: 0; /* Reduce or remove padding at the top of the container */
+   padding-top: 0;
 }
 
 .hidden {
@@ -323,7 +321,7 @@ tr:nth-of-type(even) {
 .white-box {
    margin-left: -40px;
    padding-left: 20px;
-   padding-top: 0.5rem; /* Adjust padding-top to reduce space */
+   padding-top: 0.5rem;
 }
 
 .hidden {
@@ -350,7 +348,7 @@ tr:nth-of-type(even) {
 .sidebar-brand {
    display: flex;
    align-items: center;
-   margin-bottom: 20px; /* Adjust spacing if needed */
+   margin-bottom: 20px;
 }
 
 header {
@@ -382,7 +380,7 @@ header {
 }
 
 .sidebar, .greeting-box, .blue-box {
-   width: 220px !important; /* Set a consistent width for all */
+   width: 220px !important; 
 }
 
 .greeting-box {
@@ -396,7 +394,7 @@ header {
    margin-bottom: -30px;
    width: 220px;
    box-sizing: border-box;
-   margin-left: 10px; /* Add left margin */
+   margin-left: 10px; 
 }
 
 .profile-picture {
@@ -418,9 +416,9 @@ header {
    color: white;
    border-radius: 10px;
    margin-top: -192px;
-   margin-bottom: 20px; /* Ensure spacing between boxes */
+   margin-bottom: 20px;
    margin-right: 0px;
-   margin-left: 10px; /* Add left margin */
+   margin-left: 10px;
    height: 95px;
 }
 
@@ -440,11 +438,11 @@ header {
 
 
 #contactSection {
-   background-color: white; /* Adjust background color for contact section */
+   background-color: white; 
 }
 
 #companySection {
-   background-color: white; /* Adjust background color for company section */
+   background-color: white; 
 }
 
 #menu:checked + .options .nav {
