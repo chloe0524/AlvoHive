@@ -22,10 +22,7 @@ class Company(db.Model):
     logo = db.Column(db.LargeBinary)
 
 @company_list.route('/')
-#def index():
-#    company = Company.query
-#    return render_template('basic_table.html', company=company)
-#
+# define main route
 def index():
     company = Company.query.all()
     company_data = [
