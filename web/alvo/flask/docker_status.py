@@ -3,6 +3,7 @@ import requests
 import os
 import psutil
 
+# Instruction
 # WSL/Windows: all containers are reachable with hostname "localhost"
 # Inside Apache container: use WSL host IP
 #
@@ -20,7 +21,7 @@ DOCKER_API_URL = 'http://'+docker_host+':2375' # Docker REST API endpoint
 
 docker_status = Flask(__name__)
 
-
+# debug
 ######################################################################
 # Processes information for a container id: route /processes/
 ######################################################################
@@ -39,7 +40,7 @@ def processes(container_id):
     all_processes = get_container_processes(container_id)
     return jsonify(all_processes)
 
-
+# debug
 ######################################################################
 # List of all running containers: startup route /
 ######################################################################
