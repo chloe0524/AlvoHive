@@ -15,7 +15,7 @@
 ![Docker](https://img.shields.io/badge/docker-0091EA?style=for-the-badge&logo=docker&logoColor=white)
 ![VirtualBox](https://img.shields.io/badge/virtualbox-183A61?style=for-the-badge&logo=virtualbox&logoColor=white)
 
-### Technologies
+### Technologies / Related Projects
 ![Kali Linux](https://img.shields.io/badge/kali%20linux-557C94?style=for-the-badge&logo=kalilinux&logoColor=white)
 ![Metasploitable2](https://img.shields.io/badge/metasploitable2-0091EA?style=for-the-badge&logo=metasploit&logoColor=white)
 ![Apache](https://img.shields.io/badge/apache-D22128?style=for-the-badge&logo=apache&logoColor=white)
@@ -46,11 +46,47 @@
 \
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2911; [Docker image installation, configuration and runtime PostgreSQL](documentation_infra/Apache_Postgres_docker.md)
 
-### Timeline
+## Installation
+To install and run AlvoHive locally, follow these steps:
+1. Clone the repository:
+   ```
+   git clone https://github.com/chloe0524/AlvoHive.git
+   ```
+2. Navigate to the project directory.
+3. Follow the specific installation guides provided for each component (Kali Linux VM, Metasploitable2 VM, Docker containers). The documentation is available [here](https://github.com/chloe0524/AlvoHive/tree/AlvoMain/documentation_infra%3A%203.%20Follow%20the%20specific%20installation%20guides%20provided%20for%20each%20component%20(Kali%20Linux%20VM%2C%20Metasploitable2%20VM%2C%20Docker%20containers)%2C%20the%20documentation%20is%20available%20here.)
+
+
+## Usage
+After installation, start the containers by running:
+```
+docker-compose up
+```
+Access the application at `http://localhost:5000` in your web browser.
+
+## Contribution/Author
+Chloe - https://github.com/chloe0524
+
+## Related Projects
+- [Kali Linux](https://www.kali.org/)
+- [Metasploit](https://www.metasploit.com/)
+- [Docker](https://www.docker.com/)
+- [Flask](https://flask.palletsprojects.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+
+## Screenshots
+
+![unnamed (3)](https://github.com/user-attachments/assets/2b085139-aba3-4db7-845d-ee99af4c171b)
+
+![unnamed (2)](https://github.com/user-attachments/assets/af11a001-f4fb-4723-b828-30af26059eae)
+
+
+## Timeline
 
 ![timeline_alvohive](https://github.com/chloe0524/AlvoHive/assets/127857895/c2e7f190-e1a8-4c8b-b263-0ac77d630efe)
 
 
-### Architecture
+## Architecture
 ![Alvo_archi_slides drawio](https://github.com/chloe0524/AlvoHive/assets/127857895/ec9952c4-6dca-4cb6-a3da-420c81fcc8ac)
 
+## Licensing
+This project is licensed under the MIT License. See the LICENSE file for details.
