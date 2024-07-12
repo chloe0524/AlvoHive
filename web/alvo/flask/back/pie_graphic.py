@@ -5,6 +5,7 @@ import sys
 import os
 import matplotlib.pyplot as plt
 
+# define the cvss from low to critical based on public informations
 def categorize_cvss(score):
     if score >= 0 and score < 4:
         return 'Low'
@@ -26,6 +27,7 @@ file_path = sys.argv[1]
 with open(file_path, 'r', encoding='utf-8') as file:
     content = file.read()
 
+# define pattern to look for in the markdown file
 pattern = r'CVSS:\s*(\d+(\.\d+)?)'
 matches = re.findall(pattern, content)
 
