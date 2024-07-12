@@ -12,6 +12,7 @@ if len(sys.argv) != 2:
 
 file_path = sys.argv[1]
 
+# define what to look for when parsing the markdown report
 service_names = []
 with open(file_path, 'r') as file:
     for line in file:
