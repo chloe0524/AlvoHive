@@ -53,7 +53,7 @@ To install and run AlvoHive locally, follow these steps:
    git clone https://github.com/chloe0524/AlvoHive.git
    ```
 2. Navigate to the project directory.
-3. Follow the specific installation guides provided for each component (Kali Linux VM, Metasploitable2 VM, Docker containers). The documentation is available [here](https://github.com/chloe0524/AlvoHive/tree/AlvoMain/documentation_infra%3A%203.%20Follow%20the%20specific%20installation%20guides%20provided%20for%20each%20component%20(Kali%20Linux%20VM%2C%20Metasploitable2%20VM%2C%20Docker%20containers)%2C%20the%20documentation%20is%20available%20here.)
+3. Follow the specific installation guides provided for each component (Kali Linux VM, Metasploitable2 VM, Docker containers). The documentation is available [here](https://github.com/chloe0524/AlvoHive/tree/AlvoMain/documentation_infra)
 
 
 ## Usage
