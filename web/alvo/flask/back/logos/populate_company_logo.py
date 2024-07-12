@@ -4,9 +4,11 @@
 # Update the logo for a company
 #
 
+
 import os
 import sys
 import psycopg2
+
 
 def update_logo(file_path, image_id):
 	try:
