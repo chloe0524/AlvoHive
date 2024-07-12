@@ -1,3 +1,5 @@
+/* comments to help set up the database */ 
+
 /*
 
 CREATE TABLE company(
