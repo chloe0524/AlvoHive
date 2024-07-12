@@ -75,10 +75,11 @@ Chloe - https://github.com/chloe0524
 
 ## Screenshots
 
-![unnamed (3)](https://github.com/user-attachments/assets/2b085139-aba3-4db7-845d-ee99af4c171b)
+![Capture d'écran 2024-07-12 222927](https://github.com/user-attachments/assets/218841b4-bc05-4d42-b605-b730092661e8)
 
-![unnamed (2)](https://github.com/user-attachments/assets/af11a001-f4fb-4723-b828-30af26059eae)
+![Capture d'écran 2024-07-12 222940](https://github.com/user-attachments/assets/56536d66-f44a-43f5-92bd-f014942c296f)
 
+![Capture d'écran 2024-07-12 222716](https://github.com/user-attachments/assets/6404f5b8-e70b-4c51-ac5b-fdc9d0ad7134)
 
 ## Timeline
 
