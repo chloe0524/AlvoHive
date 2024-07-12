@@ -1,5 +1,4 @@
 #!/bin/bash
-
 for image in logos/*.png
 do
     id_image=$(basename "${image}" | awk -F_ '{print $1}')
