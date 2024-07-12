@@ -1,5 +1,5 @@
 /* 
-	Table replicated from Postgres Metasploit already exist : services, hosts
+	Tables replicated from Postgres Metasploit already exist : services, hosts
 */
 
 \! echo "-----------------------------------------------------------"
