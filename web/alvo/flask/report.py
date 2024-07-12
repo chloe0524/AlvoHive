@@ -46,7 +46,7 @@ def execute():
     result = subprocess.run([base_path + '/back/generate_report.py', row_value])
     return jsonify({'output': result.stdout}), 200
 
-
+# main function
 @report.route('/')
 def index():
     try:
