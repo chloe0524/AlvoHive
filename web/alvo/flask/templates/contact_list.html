@@ -20,6 +20,7 @@
     </div>
     <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
     <script>
+      /* start of grid */
       new gridjs.Grid({
         columns: [
         { id: 'id_company', name: 'id_company', hidden: true},
@@ -34,6 +35,7 @@
         { id: 'url', name: 'url', hidden: true },
         { id: 'logo', name: 'Logo', sort: false, formatter: (_, row) => gridjs.html(`<a href="${row.cells[9].data}" target="_blank"><img src="data:image/png;base64,${row.cells[10].data}" alt="Logo" width="50"/></a>`) }
         ],
+        /* define layout of grid */
         data: [
           {% for company_contact in company_contact %}
             {
